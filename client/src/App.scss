@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i');
+@import "~main.scss";
+@import "~animate.scss";
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    color: #222;
+    list-style: none;
+    text-decoration: none;
+}
+
+html,body,#root {
+    width: 100%;
+    min-height: 100%;
+}
+
+#root {
+    background-color: $main-background-color;
+    min-height: 100%;
+    article {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+        min-height: 100%;
+    }
+}
+
+body {
+    background-color: $white;
+    min-height: 100%;
+}
+
+//Global styles for creating flexible components
+
+.header-text {
+    color: $main-color;
+    font-size: $bigTitleSize;
+    margin-bottom: 40px;
+    text-align: center;
+    .divider{
+        max-width: 600px;
+        &:before {
+            border-color: $main-background-color;
+        }
+    }
+}
+
+.withStretch {
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-start;
+}
+
+.divider {
+    width: 80%;
+    margin: 10px auto;
+    height: 2px;
+    background-color: $main-color;
+    border-radius: 2px;
+    position: relative;
+    &:before {
+        content: '';
+        width: 12px;
+        height: 12px;
+        position: absolute;
+        left: 50%;
+        top: -10px;
+        transform: translateX(-50%);
+        background-color: $main-color;
+        border: 5px solid $white;
+        border-radius: 100%;
+    }
+}
+
+.image-centering {
+    background-size: cover;
+    background-position: center center;
+    transform: scale(1.03);
+}
+
+.page-content {
+    padding: 40px 100px;
+    box-sizing: border-box;
+}
+
+.slick-slider {
+    max-width: 100%;
+    width: 100%;
+    height: 600px;
+    .MainImageBlock {
+        transform: none;
+    }
+    .slick-next {
+        right: 20px;
+        &:before {
+            font-size: 32px;
+            color: $main-color;
+        }
+    }
+    .slick-prev {
+        z-index: 1;
+        left: 20px;
+        &:before {
+            font-size: 32px;
+            color: $main-color;
+        }
+    }
+}
+
+.flexible {
+    display: flex;
+    &.horizontal {
+        flex-direction: row;
+    }
+    &.vertical {
+        flex-direction: column;
+    }
+    &.vertical-reverse {
+        flex-direction: column-reverse;
+    }
+    &.jStart {
+        justify-content: flex-start;
+    }
+    &.jEnd {
+        justify-content: flex-end;
+    }
+    &.jCenter {
+        justify-content: center;
+    }
+    &.jAround {
+        justify-content: space-around;
+    }
+    &.jBetween {
+        justify-content: space-between;
+    }
+    &.aStart {
+        align-items: flex-start;
+    }
+    &.aEnd {
+        align-items: flex-end;
+    }
+    &.aCenter {
+        align-items: center;
+    }
+    &.wrap {
+        flex-wrap: wrap;
+    }
+    &.noWrap {
+        flex-wrap: nowrap;
+    }
+    &.grow {
+        flex-grow: 1;
+    }
+    &.noGrow {
+        flex-grow: 0;
+    }
+    &.shrink {
+        flex-shrink: 1;
+    }
+    &.noShrink {
+        flex-shrink: 0;
+    }
+}
+
+.singleLine {
+    white-space: nowrap;
+}
+
+.truncate-lines-styles {
+    display: -webkit-box;
+    word-break: break-word;
+}
+
+.truncate {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    &.twoLines {
+        -webkit-line-clamp: 2;
+        @extend .truncate-lines-styles;
+        -webkit-box-orient: vertical;
+    }
+    &.threeLines {
+        -webkit-line-clamp: 3;
+        @extend .truncate-lines-styles;
+        -webkit-box-orient: vertical;
+    }
+    &.fourLines {
+        -webkit-line-clamp: 4;
+        @extend .truncate-lines-styles;
+        -webkit-box-orient: vertical;
+    }
+    &.fiveLines {
+        -webkit-line-clamp: 5;
+        @extend .truncate-lines-styles;
+        -webkit-box-orient: vertical;
+    }
+}

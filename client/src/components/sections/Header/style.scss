@@ -1,0 +1,121 @@
+@import "~main.scss";
+
+$bar-width: 40px;
+$bar-height: 4px;
+$bar-spacing: 10px;
+
+.Header {
+  height: 56px;
+  min-height: 56px;
+  position: relative;
+  .menu-wrapper {
+    display: none;
+    position: absolute;
+    height: 28px;
+    top: 14px;
+    right: 24px;
+    cursor: pointer;
+  }
+  .hamburger-menu,
+.hamburger-menu:after,
+.hamburger-menu:before {
+  width: $bar-width;
+	height: $bar-height;
+  border-radius: 5px;
+}
+
+.hamburger-menu {
+	position: relative;
+	transform: translateY($bar-spacing);
+	background: rgba(255, 255, 255, 1);
+	transition: all 0ms 300ms;
+
+  &.animate {
+    background: rgba(255, 255, 255, 0);
+  }
+}
+
+.hamburger-menu:before {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: $bar-spacing;
+	background: rgba(255, 255, 255, 1);
+	transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hamburger-menu:after {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: $bar-spacing;
+	background: rgba(255, 255, 255, 1);
+	transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hamburger-menu.animate:after {
+	top: 0;
+	transform: rotate(45deg);
+	transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);;
+}
+
+.hamburger-menu.animate:before {
+	bottom: 0;
+	transform: rotate(-45deg);
+	transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);;
+}
+  nav {
+    height: 56px;
+    padding: 8px 24px;
+    &.isShadowShown {
+      box-shadow: $material-header-shadow;
+    }
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: $main-color;
+    z-index: 100;
+    .logo {
+      a {
+        display: flex;
+        align-items: center;
+        width: 150px;
+        min-width: 150px;
+        .img {
+          width: 150px;
+          min-width: 150px;
+          height: 30px;
+          background-size: cover;
+        }
+      }
+    }
+    ul {
+      li {
+        margin-right: 24px;
+        &.languages {
+          height: 32px;
+          .lang-block {
+            height: 32px;
+            .Icon {
+              cursor: pointer;
+              height: 32px;
+              &.selected {
+                border: 1px solid $white;
+                border-radius: 6px;
+              }
+            }
+          }
+        }
+        a {
+          color: $white;
+          font-size: $text-size;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

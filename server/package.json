@@ -1,0 +1,29 @@
+{
+  "name": "level-up",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Levon1994/levelup.git"
+  },
+  "author": "Levon Azizyan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Levon1994/levelup/issues"
+  },
+  "homepage": "https://github.com/Levon1994/levelup#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.8",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.5"
+  }
+}

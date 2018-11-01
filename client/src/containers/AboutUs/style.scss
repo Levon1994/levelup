@@ -1,0 +1,33 @@
+@import "~main.scss";
+
+.AboutUs {
+  overflow: hidden;
+  .about-us-content {
+    width: 100%;
+    h2 {
+      margin-bottom: 5rem;
+    }
+    .about-Info-content {
+      margin-bottom: 2rem;
+      &.reverse {
+        flex-direction: row-reverse;
+        p {
+          padding-left: 0;
+          padding-right: 2rem;
+        }
+      }
+      .image-centering {
+        min-width: 400px;
+        height: 250px;
+        transform: none;
+        border-radius: 10px;
+        box-shadow: $material-shadow;
+      }
+      p {
+        line-height: 28px;
+        padding-left: 2rem;
+        font-size: 14px;
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+@import "~main.scss";
+
+.slider-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 105;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(92, 43, 227, 0.68);
+  .LevelUpSlider {
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+    box-sizing: border-box;
+    > .Icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .next {
+      transform: rotate(180deg);
+      .Icon {
+        cursor: pointer;
+      }
+      .hidden {
+        opacity: 0;
+        pointer-events: none;
+        cursor: auto;
+      }
+    }
+    .prev {
+      .Icon{
+        cursor: pointer;
+      }
+      .hidden {
+        opacity: 0;
+        pointer-events: none;
+        cursor: auto;
+      }
+    }
+    .content {
+      width: 80%;
+      height: 100%;
+      overflow: hidden;
+      box-shadow: $material-shadow;
+      .image-centering {
+        transform: none;
+      }
+      .image-block {
+        height: 100%;
+        position: relative;
+        .hidden-block {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          background-color: $main-color;
+          padding: 16px 24px;
+          box-sizing: border-box;
+          width: 100%;
+          h3 {
+            color: $white;
+            text-shadow: 2px 2px rgba(255, 255, 255, 0.44);
+          }
+          .course {
+            margin: 15px 0;
+          }
+          p {
+            color: $white;
+          }
+        }
+      }
+    }
+    svg {
+      fill:$white;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import "~main.scss";
+
+.Courses {
+  overflow: hidden;
+  .courses-content {
+    width: 100%;
+    .courses-block {
+      flex-flow: row wrap;
+    }
+  }
+}

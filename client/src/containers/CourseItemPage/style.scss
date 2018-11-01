@@ -1,0 +1,72 @@
+@import "~main.scss";
+
+.CourseItemPage {
+  overflow: hidden;
+  .course-info-block {
+    .info {
+      justify-content: center;
+      margin-bottom: 16px;
+      .Icon {
+        height: 30px;
+        margin-right: 12px;
+        svg {
+          fill: $main-color;
+        }
+      }
+      span {
+        color: $blue;
+        font-size: 20px;
+        margin-right: 12px;
+        text-transform: capitalize;
+      }
+      p {
+        font-size: 20px;
+      }
+    }
+  }
+  .course-item-content-block {
+    padding-bottom: 50px;
+    margin: 0 auto;
+    max-width: 600px;
+    align-items: flex-start;
+  }
+  .trainer-info {
+    padding-bottom: 50px;
+    .image-block {
+      width: 150px;
+      height: 150px;
+      border: 3px solid $main-color;
+      border-radius: 100%;
+      .img {
+        border: 6px solid $white;
+        width: calc(100% - 12px);
+        height: calc(100% - 12px);
+        border-radius: 100%;
+      }
+    }
+    .name {
+      font-size: 24px;
+      color: $blue;
+    }
+    .position {
+      text-align: center;
+    }
+  }
+  .courses-item-content {
+    width: 100%;
+    overflow: hidden;
+    .desc-line {
+      font-size: 20px;
+      justify-content: center;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      span {
+        display: block;
+        min-width: 25px;
+        height: 15px;
+        margin-right: 1rem;
+        margin-top: 7px;
+      }
+    }
+  }
+}

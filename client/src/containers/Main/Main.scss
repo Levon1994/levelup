@@ -1,0 +1,11 @@
+@import "~main.scss";
+
+.Main {
+  .main-content {
+    width: 100%;
+    padding-top: 60px;
+    .members {
+      flex-flow: row wrap;
+    }
+  }
+}

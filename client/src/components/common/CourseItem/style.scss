@@ -1,0 +1,21 @@
+@import "~main.scss";
+
+.CourseItem {
+  width: 260px;
+  height: 260px;
+  box-shadow: $material-shadow;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 6px;
+  box-sizing: border-box;
+  background-color: $main-color;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  &:hover {
+    box-shadow: 0px 1px 11px 1px rgba(0, 0, 0, 0.2), 0px 4px 2px 1px rgba(0, 0, 0, 0.14), 0px 2px 3px -1px rgba(0, 0, 0, 0.12);
+  }
+}

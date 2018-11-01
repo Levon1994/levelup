@@ -1,0 +1,167 @@
+// Extra large devices (large desktops, 1200px and up)
+@media screen and (max-width: 1200px) {
+  .page-content {
+    padding: 40px 80px;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media screen and (max-width: 992px) {
+  .page-content {
+    padding: 30px 70px;
+  }
+  .MainImageBlock, .slick-slider, .MainVideoBlock {
+    height: 500px;
+  }
+  .header-text {
+    font-size: 40px;
+  }
+  .AboutUs {
+    .about-Info-content {
+      flex-direction: column !important;
+      .image-centering {
+        margin-bottom: 2rem;
+        width: 100%;
+        min-width: inherit !important;
+        height: 300px !important;
+      }
+      p {
+        padding: 0 !important;
+        line-height: 25px !important;
+      }
+    }
+  }
+  .ContactUs {
+    .contact-us-content {
+      .contact-info-block {
+        h2 {
+          max-width: 90% !important;
+        }
+        .info-icons {
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media screen and (max-width: 768px) {
+  .page-content {
+    padding: 25px 50px;
+  }
+  .MainImageBlock, .slick-slider, .MainVideoBlock {
+    height: 400px;
+  }
+
+  .header-text {
+    font-size: 36px;
+  }
+  .Header {
+    .menu-wrapper {
+      display: block;
+    }
+    ul {
+      display: none;
+    }
+    &.headerShown {
+      &~footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+      nav {
+        height: calc(100% - 90px);
+        flex-direction: column;
+        justify-content: flex-start !important;
+        padding-top: 12px;
+        box-shadow: none;
+        ul {
+          position: absolute;
+          top: 76px;
+          flex-direction: column;
+          align-items: flex-start;
+          display: flex;
+          li {
+            margin-right: 0;
+            margin-bottom: 36px;
+          }
+        }
+      }
+    }
+  }
+  .ContactUs {
+    .contact-us-content {
+      .contact-info-block {
+        padding: 3rem 1rem 2rem !important;
+        h2 {
+          max-width: 100% !important;
+          font-size: 16px;
+          font-weight: bold;
+          line-height: 20px !important;
+        }
+      }
+    }
+  }
+
+}
+
+// Small devices (landscape phones, 576px and up)
+@media screen and (max-width: 576px) {
+  .page-content {
+    padding: 25px 30px !important;
+  }
+  .desc-line {
+   font-size: 16px !important;
+  }
+  .Footer {
+    flex-direction: column;
+    height: 110px;
+    padding: 24px;
+  }
+
+  .AboutUs {
+    .about-Info-content {
+      .image-centering {
+        height: 200px !important;
+      }
+      p {
+        padding: 0 !important;
+        line-height: 25px !important;
+        font-size: 13px !important;
+      }
+    }
+  }
+
+  .MainImageBlock, .slick-slider, .MainVideoBlock {
+    height: 350px;
+  }
+  .header-text {
+    font-size: 24px;
+  }
+  .course-info-block {
+    .info {
+      margin-bottom: 12px !important;
+       span, p {
+         font-size: 16px !important;
+       }
+    }
+  }
+  .ContactUs {
+    .contact-us-content {
+      .contact-info-block {
+        .info-icons {
+          flex-direction: column;
+          .in-ico {
+            > div:first-child {
+              flex-direction: column;
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}

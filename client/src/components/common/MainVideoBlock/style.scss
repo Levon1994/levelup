@@ -1,0 +1,11 @@
+@import "~main.scss";
+
+.MainVideoBlock {
+  width: 100%;
+  height: 600px;
+  background-color: $main-color;
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+}
