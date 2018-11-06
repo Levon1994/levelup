@@ -4,6 +4,7 @@ import {
   Switch,
   withRouter,
 } from 'react-router-dom';
+import { connect } from "react-redux";
 
 import {
     Header,
@@ -17,12 +18,16 @@ import {
     Courses,
     CourseItemPage,
     Students,
+    Login,
 } from 'containers';
 
 import './App.scss';
 import './media.scss';
 
+const mapStateToProps = ({logged}) => ({logged})
+
 @withRouter
+@connect(mapStateToProps, null)
 export default class App extends PureComponent {
 
     componentWillMount(){
@@ -38,6 +43,7 @@ export default class App extends PureComponent {
         return (
             <article>
                 <Header lang={this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length - 1]} />
+                {this.props.logged && <Login/>}
                 <Switch>
                     <Route
                       exact

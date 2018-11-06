@@ -3,6 +3,7 @@ import {
     withRouter,
     NavLink,
 } from 'react-router-dom';
+import { connect } from "react-redux";
 
 import { Icon } from 'components/common';
 
@@ -10,11 +11,12 @@ import { selectLanguage } from 'translate';
 
 import Logo from 'assets/level-up-logo.png';
 
-
+import { toggleLogin } from 'actions';
 
 import './style.scss';
 
 @withRouter
+@connect(null, { toggleLogin })
 export default class Header extends PureComponent {
 
     state = {
@@ -51,7 +53,12 @@ export default class Header extends PureComponent {
         }
     };
 
-    toggleHeader = () => this.setState({ headerShown: !this.state.headerShown });
+    toggleHeader = (key) => {
+        if(key === 'login') {
+            this.props.toggleLogin(true);
+        }
+        this.setState({ headerShown: !this.state.headerShown });
+    };
 
     render() {
         return (
@@ -77,6 +84,9 @@ export default class Header extends PureComponent {
                         </li>
                         <li className="flexible aCenter">
                             <NavLink to={`/contact-us/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_contact_us}</NavLink>
+                        </li>
+                        <li className="flexible aCenter">
+                            <NavLink to={this.props.history.location.pathname} onClick={() => this.toggleHeader('login')}>{this.state.language && selectLanguage(this.state.language).header_login}</NavLink>
                         </li>
                         <li className="languages flexible aCenter">
                             <div className="lang-block flexible aStart">

@@ -1,6 +1,8 @@
 export Main from './Main';
+export Login from './Login';
 export AboutUs from './AboutUs';
-export ContactUs from './ContactUs';
 export Courses from './Courses';
-export CourseItemPage from './CourseItemPage';
 export Students from './Students';
+export ContactUs from './ContactUs';
+export CourseItemPage from './CourseItemPage';
+

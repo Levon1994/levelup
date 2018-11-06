@@ -24,7 +24,6 @@ export default class LevelUpSlider extends PureComponent{
     }
 
     render(){
-        console.log("Log ::: this.props.arrow ::: ", this.props.arrow);
         return ReactDOM.createPortal(
             <div className="LevelUpSlider flexible jBetween">
                 <div className="flexible jBetween grow">
