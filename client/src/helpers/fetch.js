@@ -1,49 +1,66 @@
 import { BASE_URL } from 'configs';
+import axios from 'axios';
 
 export default class Fetch {
-    static async fetch(options) {
-        const { ACCESS_TOKEN } = sessionStorage;
-        const { headers, method, body, path } = options;
-
-        let requestOptions = {
+    static async request(options) {
+        let userData = {};
+        const { access_token : ACCESS_TOKEN } = userData;
+        const { method, path, headers, body, additionalOptions = {} } = options;
+        let requestConfig = {
+            url: `${BASE_URL}${path}`,
+            method,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: (ACCESS_TOKEN
-                    ? `Bearer ${ACCESS_TOKEN}`
-                    : undefined
-                ),
-                ...headers,
+                Authorization: (ACCESS_TOKEN ? `Bearer ${ACCESS_TOKEN}` : undefined),
+                ...headers
             },
-            method,
+            ...additionalOptions,
         };
 
         if (body) {
-            requestOptions.body = JSON.stringify(body);
+            requestConfig.data = JSON.stringify(body);
         }
 
-        // Fire the Request and Return the response promise Object
-        const requestPromise = await fetch(new Request(`${BASE_URL}${path}`, requestOptions));
+        // Fire the Request and Return the Response Promise Object.
+        const responsePromise = await axios.request(requestConfig);
 
-        if (requestPromise && requestPromise.status) {
-            // Check ::: it can be not json, for example text/html
-            return requestPromise.text().then(text => text
-                ? JSON.parse(text)
-                : body
-            );
-        }
-        return body;
+        // if (responsePromise && responsePromise.status) {
+        //     // Check ::: it can be not json, for example text/html
+        //     //
+        //     if(responsePromise.status === 401){
+        //         return redirectToLogin();
+        //     }
+        //     // if (responsePromise.config.responseType === 'blob' && responsePromise.data) {
+        //     //     //only for downloaded blobs
+        //     //     //extract file name from 'content-disposition'response header and attach it to result
+        //     //     const disposition = responsePromise.headers['content-disposition'];
+        //     //     if (disposition && disposition.indexOf('attachment') !== -1) {
+        //     //         var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+        //     //         var matches = filenameRegex.exec(disposition);
+        //     //         if (matches != null && matches[1]) {
+        //     //             responsePromise.data.filename = matches[1].replace(/['"]/g, '');
+        //     //         }
+        //     //     }
+        //     // }
+        //     return responsePromise.data;
+        // }
+
+        return {
+            payload: responsePromise.data,
+            status: responsePromise.status,
+        };
     }
 
     /* GET (retrieve) */
-    static get = options => Fetch.fetch({ ...options, method: 'GET' });
+    static get = options => Fetch.request({ ...options, method: 'GET' });
 
     /* POST (create) */
-    static post = options => Fetch.fetch({ ...options, method: 'POST' });
+    static post = options => Fetch.request({ ...options, method: 'POST' });
 
     /* PUT (update) */
-    static put = options => Fetch.fetch({ ...options, method: 'PUT' });;
+    static put = options => Fetch.request({ ...options, method: 'PUT' });
 
     /* DELETE (remove) */
-    static delete = options => Fetch.fetch({ ...options, method: 'DELETE' });
+    static delete = options => Fetch.request({ ...options, method: 'DELETE' });
 }

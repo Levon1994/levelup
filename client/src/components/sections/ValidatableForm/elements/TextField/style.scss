@@ -1,0 +1,42 @@
+@import "~main.scss";
+
+$helper-color: #545b5d;
+$error-color: #f35351;
+
+.TextField {
+  &_content {
+    height: 45px;
+    display: flex;
+    align-items: center;
+  }
+  &_startAdornment {
+    padding-left: 12px;
+  }
+  &_endAdornment {
+    padding-right: 12px;
+  }
+  &_helperText,
+  &_errorText {
+    padding: 8px 14px;
+    font-size: 11.5px;
+  }
+  &_helperText {
+    color: $helper-color;
+  }
+  .formElement_errorText {
+    color: $error-color;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+
+  input {
+    border: 0;
+    outline: none;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    box-shadow: $material-shadow;
+    padding: 0 15px;
+    border-radius: 3px;
+  }
+}

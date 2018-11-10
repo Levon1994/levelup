@@ -7,8 +7,46 @@
   z-index: 105;
   width: 100%;
   height: 100%;
-  background-color: rgba(92, 43, 227, 0.68);
+  background-color: rgba(8, 8, 8, 0.63);
   .Login {
-
+    height: 100%;
+    > .Icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .ValidatableForm {
+      max-width: 500px;
+      min-height: 350px;
+      box-shadow: $material-shadow;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 25px;
+      margin: 0 auto;
+      position: relative;
+      top: 150px;
+      background-color: $white;
+      border-radius: 3px;
+      background-image: url('https://firebasestorage.googleapis.com/v0/b/newproject-b6af4.appspot.com/o/level%20up%20cover%20700%20px.jpg?alt=media&token=a8c09644-d1d8-428a-841b-32e6c3d5fcff');
+      &_content {
+        .TextField{
+          margin-bottom: 20px;
+          input {
+            &::placeholder {
+              color: $main-color;
+            }
+          }
+        }
+      }
+      .LevelUpButton {
+        background-color: $white;
+        > span {
+          color: $main-color;
+          font-weight: bold;
+        }
+      }
+    }
   }
 }
