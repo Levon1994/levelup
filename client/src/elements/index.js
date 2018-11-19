@@ -1,0 +1,1 @@
+export CvTemplates from './cv';

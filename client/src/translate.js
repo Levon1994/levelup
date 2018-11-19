@@ -31,9 +31,10 @@ const languages =  {
         course_item_trainer: 'Մենթոր',
         course_item_description: 'Դասընթացի նկարագրություն',
         course_item_duration_price: 'Դասընթացի տևողությունը և արժեքը',
+        cv_templates_title: 'Ռեզյումե',
     },
     ru: {
-        header_students: 'Студенти',
+        header_students: 'Студенты',
         header_courses: 'Курсы',
         header_about: 'О нас',
         header_contact_us: 'Контакты',
@@ -64,6 +65,7 @@ const languages =  {
         course_item_trainer: 'Наставник',
         course_item_description: 'Описание курса',
         course_item_duration_price: 'Продолжительность курса и цены',
+        cv_templates_title: 'Резюме',
     },
     uk: {
         header_students: 'Students',
@@ -97,6 +99,7 @@ const languages =  {
         course_item_trainer: 'Mentor',
         course_item_description: 'Course Description',
         course_item_duration_price: 'Course duration and prices',
+        cv_templates_title: 'Resume',
     }
 };
 

@@ -74,6 +74,9 @@ export default class Header extends PureComponent {
                     </div>
                     <ul className="flexible aCenter">
                         <li className="flexible aCenter">
+                            <NavLink to={`/cv/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).cv_templates_title}</NavLink>
+                        </li>
+                        <li className="flexible aCenter">
                             <NavLink to={`/students/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_students}</NavLink>
                         </li>
                         <li className="flexible aCenter">
