@@ -30,6 +30,14 @@ const teamMembers = [
         instagram: 'https://www.instagram.com/armen.zakaryan96/',
     },
     {
+        name: 'Ann Grigoryan',
+        position: 'English Mentor',
+        aboutWork: 'DC tutor at School of Languages and Professional Development',
+        imageUrl: 'https://firebasestorage.googleapis.com/v0/b/newproject-b6af4.appspot.com/o/English-mentor.jpg?alt=media&token=531b9fcb-2104-4806-aeb1-cd26c2823772',
+        facebook: 'https://www.facebook.com/dnalrednow.84',
+        instagram: 'https://www.instagram.com/dnalrednow.84/',
+    },
+    {
         name: 'Eléonore Ghazaryan',
         position: 'French Mentor',
         aboutWork: 'Fulfillment Specialist at E-World',

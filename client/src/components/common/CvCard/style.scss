@@ -1,5 +1,28 @@
 @import "~main.scss";
 
+.hover-combination {
+  padding: 15px;
+  cursor: pointer;
+  width: 50%;
+  transition: all 0.2s linear;
+  background-color: $main-color;
+  > span {
+    color: $white;
+  }
+  svg {
+    fill: $white;
+  }
+  &:hover {
+    background-color: $white;
+    > span {
+      color: $main-color;
+    }
+    svg {
+      fill: $main-color;
+    }
+  }
+}
+
 .CvCard {
   max-width: 350px;
   box-shadow: $material-shadow;
@@ -18,14 +41,10 @@
     z-index: 2;
     background-color: $white;
     .create-cv {
-      padding: 15px;
-      cursor: pointer;
-      width: 50%;
+      @extend .hover-combination;
     }
     .view-cv {
-      padding: 15px;
-      cursor: pointer;
-      width: 50%;
+      @extend .hover-combination;
     }
   }
 }
