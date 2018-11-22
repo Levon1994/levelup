@@ -2,12 +2,19 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const contacts = require('./api/routes/contacts');
 const courseInfo = require('./api/routes/course-info');
 const students = require('./api/routes/students');
 const teamMembers = require('./api/routes/team-members');
 const videoCartoon = require('./api/routes/video-cartoon');
+
+mongoose.connect('mongodb://NodeJs:'+process.env.MONGO_ATLAS_PW +'@nodejs-shard-00-00-1ava4.mongodb.net:27017,nodejs-shard-00-01-1ava4.mongodb.net:27017,nodejs-shard-00-02-1ava4.mongodb.net:27017/test?ssl=true&replicaSet=NodeJs-shard-0&authSource=admin&retryWrites=true', {
+    useNewUrlParser: true,
+});
+
+mongoose.Promise = global.Promise;
 
 //Middleware
 app.use(morgan('dev'));

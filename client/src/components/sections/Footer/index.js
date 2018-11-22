@@ -15,7 +15,7 @@ export default class Footer extends PureComponent{
         return (
             <footer className="Footer flexible aCenter jBetween">
                 <div className="logo flexible aCenter">
-                    <NavLink to={`/${this.props.lang}`}>
+                    <NavLink to={`/${this.props.history.location.pathname.split('/').includes('admin') ? 'admin' :this.props.lang}`}>
                         <img src={Logo} alt="Level Up IT Center"/>
                     </NavLink>
                 </div>

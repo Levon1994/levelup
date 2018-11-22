@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const TeamMemebrs = require('../models/team-members');
+
 const teamMembers = [
     {
         name: 'Levon Azizyan',
@@ -94,10 +96,48 @@ const teamMembers = [
 ];
 
 router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'Team members data',
-        data: teamMembers,
-    })
+    teamMembersSchema.find()
+        .exec()
+        .then(docs => {
+            const response = {
+              message: 'Team members data',
+              data: teamMembers,
+            }
+            if(docs.length >= 0) {
+                res.status(200).json(response)
+            } else {
+                res.status(404).json({ message: 'No entries found' })
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err })
+        })
+});
+
+router.post('/', (req, res, next) => {
+    const teamMembersSchema = new TeamMemebrs({
+        _id: new mongoose.Types.ObjectId(),
+        name: req.body.name,
+        position: req.body.position,
+        aboutWork: req.body.aboutWork,
+        imageUrl: req.body.imageUrl,
+        facebook: req.body.facebook,
+        linkedin: req.body.linkedin,
+        instagram: req.body.instagram,
+    });
+    teamMembersSchema.save().then(result => {
+        res.status(201).json({
+            message: 'Handling POST requests to /products',
+            createdProduct: result
+        })
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    });
+
 });
 
 module.exports = router;

@@ -20,7 +20,7 @@ import './style.scss';
 export default class Header extends PureComponent {
 
     state = {
-        language: 'am',
+        language: 'uk',
         isShadowShown : false,
         headerShown: false,
     };
@@ -65,52 +65,56 @@ export default class Header extends PureComponent {
             <header className={`Header ${this.state.headerShown ? 'headerShown' :''}`}>
                 <nav className={`flexible jBetween ${this.state.isShadowShown ? 'isShadowShown' : ''}`}>
                     <div className="logo flexible aCenter">
-                        <NavLink to={`/${this.state.language}`}>
+                        <NavLink to={`/${this.props.history.location.pathname.split('/').includes('admin') ? 'admin' :this.state.language}`}>
                             <div className="img" style={{ backgroundImage: `url(${Logo})` }}/>
                         </NavLink>
                     </div>
                     <div className="menu-wrapper" onClick={this.toggleHeader}>
                       <div className={`hamburger-menu ${this.state.headerShown ? 'animate' : ''}`}></div>
                     </div>
-                    <ul className="flexible aCenter">
-                        <li className="flexible aCenter">
-                            <NavLink to={`/cv/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).cv_templates_title}</NavLink>
-                        </li>
-                        <li className="flexible aCenter">
-                            <NavLink to={`/students/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_students}</NavLink>
-                        </li>
-                        <li className="flexible aCenter">
-                            <NavLink to={`/courses/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_courses}</NavLink>
-                        </li>
-                        <li className="flexible aCenter">
-                            <NavLink to={`/about/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_about}</NavLink>
-                        </li>
-                        <li className="flexible aCenter">
-                            <NavLink to={`/contact-us/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_contact_us}</NavLink>
-                        </li>
-                        <li className="flexible aCenter">
-                            <NavLink to={this.props.history.location.pathname} onClick={() => this.toggleHeader('login')}>{this.state.language && selectLanguage(this.state.language).header_login}</NavLink>
-                        </li>
-                        <li className="languages flexible aCenter">
-                            <div className="lang-block flexible aStart">
-                                <Icon
-                                    name="armenia"
-                                    onClick={() => this.onChangeLanguage('am')}
-                                    className={this.state.language === 'am' ? 'selected' : ''}
-                                />
-                                <Icon
-                                    name="russia"
-                                    onClick={() => this.onChangeLanguage('ru')}
-                                    className={this.state.language === 'ru' ? 'selected' : ''}
-                                />
-                                <Icon
-                                    name="uk"
-                                    onClick={() => this.onChangeLanguage('uk')}
-                                    className={this.state.language === 'uk' ? 'selected' : ''}
-                                />
-                            </div>
-                        </li>
-                    </ul>
+                    {
+                        this.props.history.location.pathname.split('/').includes('admin')
+                            ? null :
+                            <ul className="flexible aCenter">
+                                <li className="flexible aCenter">
+                                    <NavLink to={`/cv/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).cv_templates_title}</NavLink>
+                                </li>
+                                <li className="flexible aCenter">
+                                    <NavLink to={`/students/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_students}</NavLink>
+                                </li>
+                                <li className="flexible aCenter">
+                                    <NavLink to={`/courses/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_courses}</NavLink>
+                                </li>
+                                <li className="flexible aCenter">
+                                    <NavLink to={`/about/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_about}</NavLink>
+                                </li>
+                                <li className="flexible aCenter">
+                                    <NavLink to={`/contact-us/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_contact_us}</NavLink>
+                                </li>
+                                <li className="flexible aCenter">
+                                    <NavLink to={this.props.history.location.pathname} onClick={() => this.toggleHeader('login')}>{this.state.language && selectLanguage(this.state.language).header_login}</NavLink>
+                                </li>
+                                <li className="languages flexible aCenter">
+                                    <div className="lang-block flexible aStart">
+                                        <Icon
+                                            name="armenia"
+                                            onClick={() => this.onChangeLanguage('am')}
+                                            className={this.state.language === 'am' ? 'selected' : ''}
+                                        />
+                                        <Icon
+                                            name="russia"
+                                            onClick={() => this.onChangeLanguage('ru')}
+                                            className={this.state.language === 'ru' ? 'selected' : ''}
+                                        />
+                                        <Icon
+                                            name="uk"
+                                            onClick={() => this.onChangeLanguage('uk')}
+                                            className={this.state.language === 'uk' ? 'selected' : ''}
+                                        />
+                                    </div>
+                                </li>
+                            </ul>
+                    }
                 </nav>
             </header>
         );

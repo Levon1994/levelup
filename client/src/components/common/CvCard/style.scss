@@ -31,9 +31,9 @@
   .image-block {
     height: 300px;
     width: 100%;
+    transition: all 0.28s linear;
     &:hover {
       transform: scale(1.2) rotate(10deg);
-      transition: all 0.28s linear;
     }
   }
   .cv-card-content {

@@ -39,26 +39,30 @@ export default class App extends PureComponent {
             this.props.history.push('/uk');
         }
 
-    }
+    };
+
+    generateRoutes = () => (
+            <Switch>
+                <Route
+                    exact
+                    path="/:lang"
+                    component={Main}
+                />
+                <Route exact path="/about/:lang" component={AboutUs} />
+                <Route exact path="/contact-us/:lang" component={ContactUs} />
+                <Route exact path="/students/:lang" component={Students} />
+                <Route exact path="/courses/:lang" component={Courses} />
+                <Route exact path="/courses/:courseName/:lang" component={CourseItemPage} />
+                <Route exact path="/cv/:lang" component={CvTemplates} />
+            </Switch>
+    );
 
     render() {
         return (
             <article>
                 <Header lang={this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length - 1]} />
                 {this.props.logged && <Login/>}
-                <Switch>
-                    <Route
-                      exact
-                      path="/:lang"
-                      component={Main}
-                    />
-                    <Route exact path="/about/:lang" component={AboutUs} />
-                    <Route exact path="/contact-us/:lang" component={ContactUs} />
-                    <Route exact path="/students/:lang" component={Students} />
-                    <Route exact path="/courses/:lang" component={Courses} />
-                    <Route exact path="/courses/:courseName/:lang" component={CourseItemPage} />
-                    <Route exact path="/cv/:lang" component={CvTemplates} />
-                </Switch>
+                {this.generateRoutes()}
                 <Footer lang={this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length - 1]}/>
             </article>
         );
