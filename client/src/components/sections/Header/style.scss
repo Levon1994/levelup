@@ -111,6 +111,11 @@ $bar-spacing: 10px;
         a {
           color: $white;
           font-size: $text-size;
+          cursor: pointer;
+          font-weight: bold;
+          &.active {
+            color: $green;
+          }
         }
         &:last-child {
           margin-right: 0;

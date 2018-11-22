@@ -65,7 +65,7 @@ export default class Header extends PureComponent {
             <header className={`Header ${this.state.headerShown ? 'headerShown' :''}`}>
                 <nav className={`flexible jBetween ${this.state.isShadowShown ? 'isShadowShown' : ''}`}>
                     <div className="logo flexible aCenter">
-                        <NavLink to={`/${this.props.history.location.pathname.split('/').includes('admin') ? 'admin' :this.state.language}`}>
+                        <NavLink to={`/${this.state.language}`}>
                             <div className="img" style={{ backgroundImage: `url(${Logo})` }}/>
                         </NavLink>
                     </div>
@@ -77,7 +77,7 @@ export default class Header extends PureComponent {
                             ? null :
                             <ul className="flexible aCenter">
                                 <li className="flexible aCenter">
-                                    <NavLink to={`/cv/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).cv_templates_title}</NavLink>
+                                    <NavLink to={`/cv/${this.state.language}`} activeClassName="active" onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).cv_templates_title}</NavLink>
                                 </li>
                                 <li className="flexible aCenter">
                                     <NavLink to={`/students/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_students}</NavLink>
@@ -92,7 +92,7 @@ export default class Header extends PureComponent {
                                     <NavLink to={`/contact-us/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_contact_us}</NavLink>
                                 </li>
                                 <li className="flexible aCenter">
-                                    <NavLink to={this.props.history.location.pathname} onClick={() => this.toggleHeader('login')}>{this.state.language && selectLanguage(this.state.language).header_login}</NavLink>
+                                    <a onClick={() => this.toggleHeader('login')}>{this.state.language && selectLanguage(this.state.language).header_login}</a>
                                 </li>
                                 <li className="languages flexible aCenter">
                                     <div className="lang-block flexible aStart">

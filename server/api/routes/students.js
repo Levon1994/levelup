@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
+
+const Students = require('../models/students');
 
 const studentsImages = [
     'https://scontent.fevn1-1.fna.fbcdn.net/v/t1.0-9/33763722_10156415795532552_6450518945576255488_n.jpg?_nc_cat=0&oh=161292d08e8fbbf1abd1de60664d4e4c&oe=5C2B0914',
@@ -8,32 +11,48 @@ const studentsImages = [
     'https://scontent.fevn1-1.fna.fbcdn.net/v/t1.0-9/33672892_10156415794512552_274701718795583488_n.jpg?_nc_cat=0&oh=95ea1602387b4539952374598a638d5a&oe=5C2A5181',
 ];
 
-const studentsInfo = [
-    {
-        name: 'Levon Azizyan',
-        course: 'Web',
-        imgUrl: 'https://scontent.fevn1-1.fna.fbcdn.net/v/t1.0-9/39585392_1935113263247213_3492294344247869440_n.jpg?_nc_cat=0&oh=0bf38bea245e52b1a44e815e8c0ed6b1&oe=5C04D15B',
-    },
-    {
-        name: 'Levon Azizyan1',
-        course: 'Web',
-        imgUrl: 'https://scontent.fevn1-1.fna.fbcdn.net/v/t1.0-9/42813397_1989441697814369_6568079480437342208_n.jpg?_nc_cat=104&_nc_ht=scontent.fevn1-1.fna&oh=8950c04091a6894017e155fd94c44c13&oe=5C801AB2',
-    },
-    {
-        name: 'Levon Azizyan2',
-        course: 'Web',
-        imgUrl: 'https://scontent.fevn1-1.fna.fbcdn.net/v/t1.0-9/39001882_1923449831080223_3349358146169602048_n.jpg?_nc_cat=110&_nc_ht=scontent.fevn1-1.fna&oh=24624f803e56137d87314db277db18a0&oe=5C3CF9F7',
-    },
-];
-
 router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'Students data',
-        data: {
-            studentsImages: studentsImages,
-            studentsInfo: studentsInfo,
-        }
-    })
+    Students.find()
+        .exec()
+        .then(students => {
+            const response = {
+                count: students.length,
+                data: {
+                  studentsImages: studentsImages,
+                  studentsInfo: students,
+                }
+            }
+            if(students.length >= 0) {
+                res.status(200).json(response)
+            } else {
+                res.status(404).json({ message: 'No entries found' })
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err })
+        })
+});
+
+router.post('/', (req, res, next) => {
+    const studentsSchema = new Students({
+          _id: new mongoose.Types.ObjectId(),
+          name: req.body.name,
+          course: req.body.course,
+          imgUrl: req.body.imgUrl,
+    });
+    studentsSchema.save().then(result => {
+        res.status(201).json({
+            message: 'Handling POST requests to /products',
+            createdStudents: result
+        })
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
+    });
+
 });
 
 module.exports = router;
