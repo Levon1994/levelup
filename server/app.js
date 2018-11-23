@@ -9,6 +9,7 @@ const courseInfo = require('./api/routes/course-info');
 const students = require('./api/routes/students');
 const teamMembers = require('./api/routes/team-members');
 const videoCartoon = require('./api/routes/video-cartoon');
+const userRoutes = require('./api/routes/user');
 
 mongoose.connect('mongodb://NodeJs:'+process.env.MONGO_ATLAS_PW +'@nodejs-shard-00-00-1ava4.mongodb.net:27017,nodejs-shard-00-01-1ava4.mongodb.net:27017,nodejs-shard-00-02-1ava4.mongodb.net:27017/test?ssl=true&replicaSet=NodeJs-shard-0&authSource=admin&retryWrites=true', {
     useNewUrlParser: true,
@@ -41,6 +42,7 @@ app.use('/course-info', courseInfo);
 app.use('/students', students);
 app.use('/team-members', teamMembers);
 app.use('/video-cartoon', videoCartoon);
+app.use('/user', userRoutes);
 
 //Error handling
 app.use((req, res, next) => {

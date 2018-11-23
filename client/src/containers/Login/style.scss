@@ -16,36 +16,79 @@
       right: 20px;
       cursor: pointer;
     }
-    .ValidatableForm {
+    .login-body {
       max-width: 500px;
       min-height: 350px;
       box-shadow: $material-shadow;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 25px;
       margin: 0 auto;
       position: relative;
       top: 150px;
       background-color: $white;
       border-radius: 3px;
-      background-image: url('https://firebasestorage.googleapis.com/v0/b/newproject-b6af4.appspot.com/o/level%20up%20cover%20700%20px.jpg?alt=media&token=a8c09644-d1d8-428a-841b-32e6c3d5fcff');
-      &_content {
-        .TextField{
-          margin-bottom: 20px;
-          input {
-            &::placeholder {
-              color: $main-color;
+      overflow: hidden;
+      background-color: $main-color;
+      .divider {
+        background-color: $white;
+        margin-bottom: 30px;
+      }
+      .social-login {
+        padding: 25px;
+        padding-bottom: 0;
+        > span:not(.Icon) {
+          color: $green;
+          font-weight: bold;
+          font-size: 24px;
+        }
+        .Icon {
+          margin:15px;
+          &:first-child {
+            svg {
+              path {
+                fill: $white !important;
+              }
             }
           }
         }
       }
-      .LevelUpButton {
-        background-color: $white;
-        > span {
-          color: $main-color;
-          font-weight: bold;
+      .ValidatableForm {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+        padding: 25px;
+        padding-top: 10px;
+        &_content {
+          .TextField{
+            margin-bottom: 20px;
+            input {
+              &::placeholder {
+                color: $main-color;
+              }
+            }
+          }
         }
+        .LevelUpButton {
+          background-color: $white;
+          > span {
+            color: $main-color;
+            font-weight: bold;
+          }
+        }
+        .login-footer {
+          button:disabled {
+            > span {
+              color: $disabled-color;
+            }
+            background-color: $disabled-background-color;
+          }
+        }
+      }
+      .img {
+        height: 65px;
+        background-size: 40%;
+        background-position: center center;
+        background-color: $main-color;
+        background-repeat: no-repeat;
       }
     }
   }

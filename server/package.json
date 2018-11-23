@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/Levon1994/levelup#readme",
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.3.8",
     "morgan": "^1.9.1"
   },
