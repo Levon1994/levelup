@@ -108,6 +108,41 @@ $bar-spacing: 10px;
             }
           }
         }
+        .auth-dropdown {
+          position: relative;
+          .img {
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            background-size: cover;
+            background-position: center center;
+            cursor: pointer;
+          }
+          .profile-menu {
+            position: absolute;
+            display: none;
+            background-color: $main-color;
+            right: -28px;
+            top: 48px;
+            &.isOpen {
+              display: flex;
+            }
+            span {
+              display: block;
+              white-space: nowrap;
+              padding: 12px;
+              color: $white;
+              transition: all 0.28s linear;
+              font-size: 14px;
+              font-weight: bold;
+              cursor: pointer;
+              &:hover{
+                background-color: $white;
+                color: $main-color;
+              }
+            }
+          }
+        }
         a {
           color: $white;
           font-size: $text-size;

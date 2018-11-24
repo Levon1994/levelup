@@ -23,6 +23,7 @@ export default class Header extends PureComponent {
         language: 'uk',
         isShadowShown : false,
         headerShown: false,
+        isOpenMenu: false,
     };
 
     componentWillMount(){
@@ -60,6 +61,8 @@ export default class Header extends PureComponent {
         this.setState({ headerShown: !this.state.headerShown });
     };
 
+    onToggleProfileMenu = () => this.setState({ isOpenMenu: !this.state.isOpenMenu })
+
     render() {
         return (
             <header className={`Header ${this.state.headerShown ? 'headerShown' :''}`}>
@@ -93,6 +96,20 @@ export default class Header extends PureComponent {
                                 </li>
                                 <li className="flexible aCenter">
                                     <a onClick={() => this.toggleHeader('login')}>{this.state.language && selectLanguage(this.state.language).header_login}</a>
+                                </li>
+                                <li>
+                                  <div className="auth-dropdown">
+                                    <div
+                                      className="img"
+                                      style={{ backgroundImage : 'url(https://firebasestorage.googleapis.com/v0/b/newproject-b6af4.appspot.com/o/user.png?alt=media&token=e2ebf99d-3b23-41bf-b934-b9ef82268432)' }}
+                                      alt=""
+                                      onClick={() => this.onToggleProfileMenu()}
+                                      />
+                                    <div className={`profile-menu flexible vertical ${this.state.isOpenMenu ? 'isOpen' : ''}`}>
+                                      <span>My Profile</span>
+                                      <span>Sign Out</span>
+                                    </div>
+                                  </div>
                                 </li>
                                 <li className="languages flexible aCenter">
                                     <div className="lang-block flexible aStart">

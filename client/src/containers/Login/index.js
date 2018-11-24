@@ -25,8 +25,11 @@ export default class Login extends PureComponent{
         this.el.className = 'login-content';
 
         this.state = {
-            isValid: false,
-            userInfo: null,
+            isSignInValid: false,
+            isSignUpValid: true,
+            userSignInInfo: null,
+            userSignUpInfo: null,
+            isLoginContent: true,
         }
     }
 
@@ -41,25 +44,98 @@ export default class Login extends PureComponent{
     generateAdditionalFooterContent = () => {
       if(true) {
           return (
-            <div className="flexible grow jBetween aCenter login-footer">
-              <LevelUpButton onClick={() => this.onSubmit()} color="primary">Sign Up</LevelUpButton>
-              <LevelUpButton onClick={() => this.onSubmit()} variant="contained" disabled={!this.state.isValid} color="primary">Sign In</LevelUpButton>
+            <div className={`flexible grow jBetween aCenter login-footer ${this.state.isLoginContent ? '' : 'reverse'}`}>
+              <LevelUpButton onClick={() => this.onSignUp()} color="primary" disabled={!this.state.isSignUpValid && !this.state.isLoginContent}>Sign Up</LevelUpButton>
+              <LevelUpButton onClick={() => this.onSignIn()} variant="contained" disabled={!this.state.isSignInValid && this.state.isLoginContent} color="primary">Sign In</LevelUpButton>
             </div>
           )
       }
     };
 
-    onChange = (userInfo) => {
-        if(this.state.isValid){
-            this.setState({ userInfo })
+    onSignInChange = (userSignInInfo) => {
+        if(this.state.isSignInValid){
+            this.setState({ userSignInInfo })
         }
     };
 
-    onSubmit = () => {
-        if(this.state.isValid){
-            console.log(this.state.userInfo)
+    onSignUpChange = (userSignUpInfo) => {
+        if(this.state.isSignUpValid){
+            this.setState({ userSignUpInfo })
         }
     };
+
+    onSignIn = () => {
+      if(!this.state.isLoginContent) {
+        this.setState({ isLoginContent: true, userSignUpInfo: null })
+      } else {
+        console.log(this.state.userSignInInfo);
+      }
+    };
+
+    onSignUp = () => {
+      if(this.state.isLoginContent) {
+        this.setState({ isLoginContent: false, userSignInInfo: null })
+      } else {
+        console.log(this.state.userSignUpInfo);
+      }
+    };
+
+    generateForm = () => (
+      this.state.isLoginContent ?
+      <ValidatableForm
+          className=" ValidatableForm "
+          additionalFooterContent={this.generateAdditionalFooterContent()}
+          onChange={this.onSignInChange}
+          onSubmit={this.onSignIn}
+          checkFormValidation={(isSignInValid) => this.setState({ isSignInValid })}
+      >
+          <FormsyText
+              required
+              name="username"
+              placeholder="Email"
+              validations="isEmail"
+              validationError="Please enter a valid E-mail address"
+              value={this.state.userSignInInfo ? this.state.userSignInInfo.username : ''}
+          />
+          <FormsyText
+              required
+              name="password"
+              placeholder="Password"
+              validations="minLength:8"
+              validationError="Please fill, minimum length should be 8"
+              value={this.state.userSignInInfo ? this.state.userSignInInfo.password : ''}
+          />
+      </ValidatableForm>:
+      <ValidatableForm
+          className=" ValidatableForm "
+          additionalFooterContent={this.generateAdditionalFooterContent()}
+          onChange={this.onSignUpChange}
+          onSubmit={this.onSignUp}
+          checkFormValidation={(isSignUpValid) => this.setState({ isSignUpValid })}
+      >
+          <FormsyText
+              required
+              name="username"
+              placeholder="Email"
+              validations="isEmail"
+              validationError="Please enter a valid E-mail address"
+          />
+          <FormsyText
+              required
+              name="password"
+              placeholder="Password"
+              validations="minLength:8"
+              validationError="Please fill, minimum length should be 8"
+          />
+          <FormsyText
+              required
+              name="repeated_password"
+              placeholder="Confirm Password"
+              validations="equalsField:password"
+              validationError="Please write same password"
+          />
+      </ValidatableForm>
+    )
 
     render(){
         return ReactDOM.createPortal(
@@ -67,35 +143,14 @@ export default class Login extends PureComponent{
                 <Icon name="close" onClick={()=> this.props.toggleLogin(false)}/>
                 <div className="login-body animated bounceInDown flexible vertical jBetween">
                   <div className="social-login flexible vertical grow aCenter jCenter">
-                    <span>Sign In with</span>
+                    <span>Sign {this.state.isLoginContent ? 'In' : 'Up'} with</span>
                     <div className="flexible">
                       <Icon name="facebook" width={40} height={40}/>
                       <Icon name="gmail" width={45} height={45}/>
                     </div>
                   </div>
                   <div className="divider"/>
-                  <ValidatableForm
-                      className=" ValidatableForm "
-                      additionalFooterContent={this.generateAdditionalFooterContent()}
-                      onChange={this.onChange}
-                      onSubmit={this.onSubmit}
-                      checkFormValidation={(isValid) => this.setState({ isValid })}
-                  >
-                      <FormsyText
-                          required
-                          name="username"
-                          placeholder="Email"
-                          validations="isEmail"
-                          validationError="Please enter a valid E-mail address"
-                      />
-                      <FormsyText
-                          required
-                          name="password"
-                          placeholder="Password"
-                          validations="minLength:8"
-                          validationError="Please fill, minimum length should be 8"
-                      />
-                  </ValidatableForm>
+                  { this.generateForm() }
                   <div className="img" style={{ backgroundImage: `url(${Logo})` }}/>
                 </div>
             </div>,
