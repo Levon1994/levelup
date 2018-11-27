@@ -7,5 +7,17 @@
     .members {
       flex-flow: row wrap;
     }
+    .quzzies {
+      & ~ a {
+        width: max-content;
+        margin: 40px auto;
+        .LevelUpButton {
+          background-color: $main-color;
+          > span {
+            font-weight: bold;
+          }
+        }
+      }
+    }
   }
 }

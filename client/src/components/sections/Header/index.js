@@ -9,14 +9,18 @@ import { Icon } from 'components/common';
 
 import { selectLanguage } from 'translate';
 
+import { DEFAULT_USER_IMAGE } from 'configs';
+
 import Logo from 'assets/level-up-logo.png';
 
 import { toggleLogin } from 'actions';
 
 import './style.scss';
 
+const mapStateToProps = ({ user }) => ({ user });
+
 @withRouter
-@connect(null, { toggleLogin })
+@connect(mapStateToProps, { toggleLogin })
 export default class Header extends PureComponent {
 
     state = {
@@ -61,7 +65,12 @@ export default class Header extends PureComponent {
         this.setState({ headerShown: !this.state.headerShown });
     };
 
-    onToggleProfileMenu = () => this.setState({ isOpenMenu: !this.state.isOpenMenu })
+    onToggleProfileMenu = () => this.setState({ isOpenMenu: !this.state.isOpenMenu });
+
+    onSignOut = () => {
+      window.localStorage.clear();
+      this.forceUpdate();
+    };
 
     render() {
         return (
@@ -94,23 +103,26 @@ export default class Header extends PureComponent {
                                 <li className="flexible aCenter">
                                     <NavLink to={`/contact-us/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_contact_us}</NavLink>
                                 </li>
-                                <li className="flexible aCenter">
-                                    <a onClick={() => this.toggleHeader('login')}>{this.state.language && selectLanguage(this.state.language).header_login}</a>
-                                </li>
-                                <li>
-                                  <div className="auth-dropdown">
-                                    <div
-                                      className="img"
-                                      style={{ backgroundImage : 'url(https://firebasestorage.googleapis.com/v0/b/newproject-b6af4.appspot.com/o/user.png?alt=media&token=e2ebf99d-3b23-41bf-b934-b9ef82268432)' }}
-                                      alt=""
-                                      onClick={() => this.onToggleProfileMenu()}
-                                      />
-                                    <div className={`profile-menu flexible vertical ${this.state.isOpenMenu ? 'isOpen' : ''}`}>
-                                      <span>My Profile</span>
-                                      <span>Sign Out</span>
+                                {
+                                  window.localStorage.token ?
+                                  <li>
+                                    <div className="auth-dropdown">
+                                      <div
+                                        className="img"
+                                        style={{ backgroundImage : `url(${DEFAULT_USER_IMAGE})` }}
+                                        alt=""
+                                        onClick={() => this.onToggleProfileMenu()}
+                                        />
+                                      <div className={`profile-menu flexible vertical ${this.state.isOpenMenu ? 'isOpen' : ''}`}>
+                                        <span>My Profile</span>
+                                        <span onClick={()=> this.onSignOut()}>Sign Out</span>
+                                      </div>
                                     </div>
-                                  </div>
-                                </li>
+                                  </li> :
+                                  <li className="flexible aCenter">
+                                      <a onClick={() => this.toggleHeader('login')}>{this.state.language && selectLanguage(this.state.language).header_login}</a>
+                                  </li>
+                                }
                                 <li className="languages flexible aCenter">
                                     <div className="lang-block flexible aStart">
                                         <Icon

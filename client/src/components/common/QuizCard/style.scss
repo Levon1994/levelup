@@ -1,0 +1,45 @@
+@import '~main.scss';
+
+.QuizCard {
+  box-shadow: $material-shadow;
+  width: 300px;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 12px;
+  .image-block {
+    position: relative;
+    &:hover {
+      .hidden-block {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+    .img {
+      width: 100%;
+      background-size: 250%;
+      background-position: center center;
+      background-repeat: no-repeat;
+      height: 200px;
+    }
+    .hidden-block {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.46);
+      display: flex;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.28s linear;
+      .LevelUpButton {
+        background-color: $white !important;
+        margin: auto;
+        > span {
+          color: $main-color;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

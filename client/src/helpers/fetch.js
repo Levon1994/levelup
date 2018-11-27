@@ -3,8 +3,7 @@ import axios from 'axios';
 
 export default class Fetch {
     static async request(options) {
-        let userData = {};
-        const { access_token : ACCESS_TOKEN } = userData;
+        const ACCESS_TOKEN = window.localStorage.getItem('token') || '';
         const { method, path, headers, body, additionalOptions = {} } = options;
         let requestConfig = {
             url: `${BASE_URL}${path}`,
@@ -24,27 +23,6 @@ export default class Fetch {
 
         // Fire the Request and Return the Response Promise Object.
         const responsePromise = await axios.request(requestConfig);
-
-        // if (responsePromise && responsePromise.status) {
-        //     // Check ::: it can be not json, for example text/html
-        //     //
-        //     if(responsePromise.status === 401){
-        //         return redirectToLogin();
-        //     }
-        //     // if (responsePromise.config.responseType === 'blob' && responsePromise.data) {
-        //     //     //only for downloaded blobs
-        //     //     //extract file name from 'content-disposition'response header and attach it to result
-        //     //     const disposition = responsePromise.headers['content-disposition'];
-        //     //     if (disposition && disposition.indexOf('attachment') !== -1) {
-        //     //         var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-        //     //         var matches = filenameRegex.exec(disposition);
-        //     //         if (matches != null && matches[1]) {
-        //     //             responsePromise.data.filename = matches[1].replace(/['"]/g, '');
-        //     //         }
-        //     //     }
-        //     // }
-        //     return responsePromise.data;
-        // }
 
         return {
             payload: responsePromise.data,

@@ -19,9 +19,12 @@ import {
     CourseItemPage,
     Students,
     Login,
+    Quizzes,
 } from 'containers';
 
 import { CvTemplates } from 'elements';
+
+import { getUserAuth } from 'actions/user-action';
 
 import './App.scss';
 import './media.scss';
@@ -29,7 +32,7 @@ import './media.scss';
 const mapStateToProps = ({logged}) => ({logged})
 
 @withRouter
-@connect(mapStateToProps, null)
+@connect(mapStateToProps, { getUserAuth })
 export default class App extends PureComponent {
 
     componentWillMount(){
@@ -38,7 +41,6 @@ export default class App extends PureComponent {
         } else {
             this.props.history.push('/uk');
         }
-
     };
 
     generateRoutes = () => (
@@ -49,6 +51,7 @@ export default class App extends PureComponent {
                     component={Main}
                 />
                 <Route exact path="/about/:lang" component={AboutUs} />
+                <Route exact path="/quzzies/:quiz?/:lang" component={Quizzes} />
                 <Route exact path="/contact-us/:lang" component={ContactUs} />
                 <Route exact path="/students/:lang" component={Students} />
                 <Route exact path="/courses/:lang" component={Courses} />

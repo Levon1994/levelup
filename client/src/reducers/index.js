@@ -5,6 +5,7 @@ import  { videoCartoons }  from './videoCartoon-reducer';
 import  { contacts }  from './contacts-reducer';
 import  { courseInfo }  from './courseInfo-reducer';
 import  { students }  from './students-reducer';
+import { user } from './user-reducer';
 
 const rootReducer = combineReducers({
     logged: LoginReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
     contacts,
     courseInfo,
     students,
+    user,
 });
 
 export default rootReducer;

@@ -7,6 +7,7 @@ import ValidatableForm, {
 } from 'components/sections/ValidatableForm';
 
 import { toggleLogin } from 'actions';
+import { authorizeUser } from 'actions/user-action';
 
 import Logo from 'assets/level-up-logo.png';
 
@@ -16,7 +17,9 @@ import './style.scss';
 
 const loginRoot = document.getElementById('login_root');
 
-@connect(null, {toggleLogin})
+const mapStateToProps = ({ user }) => ({ user })
+
+@connect(mapStateToProps, {toggleLogin, authorizeUser})
 export default class Login extends PureComponent{
 
     constructor(props){
@@ -35,6 +38,7 @@ export default class Login extends PureComponent{
 
     componentDidMount(){
         loginRoot.appendChild(this.el);
+
     }
 
     componentWillUnmount() {
@@ -68,7 +72,12 @@ export default class Login extends PureComponent{
       if(!this.state.isLoginContent) {
         this.setState({ isLoginContent: true, userSignUpInfo: null })
       } else {
-        console.log(this.state.userSignInInfo);
+        this.props.authorizeUser(this.state.userSignInInfo).then((data) => {
+          if(data) {
+            this.props.toggleLogin(false);
+            window.localStorage.setItem("token", JSON.stringify(data.payload.token))
+          }
+        })
       }
     };
 
@@ -91,18 +100,18 @@ export default class Login extends PureComponent{
       >
           <FormsyText
               required
-              name="username"
+              name="email"
               placeholder="Email"
               validations="isEmail"
               validationError="Please enter a valid E-mail address"
-              value={this.state.userSignInInfo ? this.state.userSignInInfo.username : ''}
+              value={this.state.userSignInInfo ? this.state.userSignInInfo.email : ''}
           />
           <FormsyText
               required
               name="password"
               placeholder="Password"
-              validations="minLength:8"
-              validationError="Please fill, minimum length should be 8"
+              validations="minLength:6"
+              validationError="Please fill, minimum length should be 6"
               value={this.state.userSignInInfo ? this.state.userSignInInfo.password : ''}
           />
       </ValidatableForm>:
@@ -138,6 +147,7 @@ export default class Login extends PureComponent{
     )
 
     render(){
+      console.log(window.localStorage);
         return ReactDOM.createPortal(
             <div className="Login">
                 <Icon name="close" onClick={()=> this.props.toggleLogin(false)}/>
