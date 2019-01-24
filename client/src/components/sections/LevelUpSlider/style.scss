@@ -44,13 +44,19 @@
       width: 80%;
       height: 100%;
       overflow: hidden;
-      box-shadow: $material-shadow;
+      display: flex;
+      align-items: center;
       .image-centering {
         transform: none;
       }
       .image-block {
         height: 100%;
         position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        box-shadow: $material-shadow;
+        overflow: hidden;
+        flex-grow: 1;
         .hidden-block {
           position: absolute;
           bottom: 0;
@@ -64,7 +70,7 @@
             text-shadow: 2px 2px rgba(255, 255, 255, 0.44);
           }
           .course {
-            margin: 15px 0;
+            margin-top: 15px;
           }
           p {
             color: $white;
@@ -74,6 +80,44 @@
     }
     svg {
       fill:$white;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px){
+  .slider-content {
+    .LevelUpSlider {
+      .image-block {
+        height: 80% !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 780px){
+  .slider-content {
+    .LevelUpSlider {
+      svg {
+        width: 25px;
+      }
+      .image-block {
+        height: 60% !important;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 500px){
+  .slider-content {
+    .LevelUpSlider {
+      padding: 1%;
+      svg {
+        width: 250;
+      }
+      .image-block {
+        height: 50% !important;
+      }
     }
   }
 }

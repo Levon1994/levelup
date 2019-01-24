@@ -22,8 +22,6 @@ import {
     Quizzes,
 } from 'containers';
 
-import { CvTemplates } from 'elements';
-
 import { getUserAuth } from 'actions/user-action';
 
 import './App.scss';
@@ -56,7 +54,6 @@ export default class App extends PureComponent {
                 <Route exact path="/students/:lang" component={Students} />
                 <Route exact path="/courses/:lang" component={Courses} />
                 <Route exact path="/courses/:courseName/:lang" component={CourseItemPage} />
-                <Route exact path="/cv/:lang" component={CvTemplates} />
             </Switch>
     );
 

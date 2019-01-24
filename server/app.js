@@ -3,24 +3,29 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const ejs = require('ejs');
 const contacts = require('./api/routes/contacts');
 const courseInfo = require('./api/routes/course-info');
 const students = require('./api/routes/students');
 const teamMembers = require('./api/routes/team-members');
 const videoCartoon = require('./api/routes/video-cartoon');
-const userRoutes = require('./api/routes/user');
+// const userRoutes = require('./api/routes/user');
+const config = require('./config');
 
-mongoose.connect('mongodb://NodeJs:'+process.env.MONGO_ATLAS_PW +'@nodejs-shard-00-00-1ava4.mongodb.net:27017,nodejs-shard-00-01-1ava4.mongodb.net:27017,nodejs-shard-00-02-1ava4.mongodb.net:27017/test?ssl=true&replicaSet=NodeJs-shard-0&authSource=admin&retryWrites=true', {
-    useNewUrlParser: true,
-});
-
+mongoose.connect(config.mongodb.url, config.mongodb.options, err => err ? console.error(err) : console.log('Mongodb connected'));
 mongoose.Promise = global.Promise;
 
 //Middleware
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+//ejs
+app.set('view engine', 'ejs');
+
+app.get('/', (req,res) => {
+  res.render('./index.ejs', { name: 'Contacts Page' })
+});
 
 //Headers
 app.use((req, res, next) => {
@@ -42,7 +47,7 @@ app.use('/course-info', courseInfo);
 app.use('/students', students);
 app.use('/team-members', teamMembers);
 app.use('/video-cartoon', videoCartoon);
-app.use('/user', userRoutes);
+// app.use('/user', userRoutes);
 
 //Error handling
 app.use((req, res, next) => {

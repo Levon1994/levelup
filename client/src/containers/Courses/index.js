@@ -7,9 +7,7 @@ import { selectLanguage } from 'translate';
 import {
     js,
     java,
-    php,
     qa_automation,
-    php_laravel,
     html_css,
     node_js,
 } from 'assets/courses';
@@ -24,8 +22,6 @@ export default class Courses extends PureComponent{
         { name: 'java', path: java },
         { name: 'qa_automation', path: qa_automation },
         { name: 'node_js', path: node_js },
-        { name: 'php', path: php },
-        { name: 'php_laravel', path: php_laravel },
     ];
 
     onMoveToCourse = (name) => this.props.history.push(`/courses/${name}/${this.props.match.params.lang}`);

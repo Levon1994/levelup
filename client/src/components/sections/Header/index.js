@@ -65,12 +65,12 @@ export default class Header extends PureComponent {
         this.setState({ headerShown: !this.state.headerShown });
     };
 
-    onToggleProfileMenu = () => this.setState({ isOpenMenu: !this.state.isOpenMenu });
-
-    onSignOut = () => {
-      window.localStorage.clear();
-      this.forceUpdate();
-    };
+    // onToggleProfileMenu = () => this.setState({ isOpenMenu: !this.state.isOpenMenu });
+    //
+    // onSignOut = () => {
+    //   window.localStorage.clear();
+    //   this.forceUpdate();
+    // };
 
     render() {
         return (
@@ -88,9 +88,9 @@ export default class Header extends PureComponent {
                         this.props.history.location.pathname.split('/').includes('admin')
                             ? null :
                             <ul className="flexible aCenter">
-                                <li className="flexible aCenter">
-                                    <NavLink to={`/cv/${this.state.language}`} activeClassName="active" onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).cv_templates_title}</NavLink>
-                                </li>
+                                {/*<li className="flexible aCenter">*/}
+                                    {/*<NavLink to={`/cv/${this.state.language}`} activeClassName="active" onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).cv_templates_title}</NavLink>*/}
+                                {/*</li>*/}
                                 <li className="flexible aCenter">
                                     <NavLink to={`/students/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_students}</NavLink>
                                 </li>
@@ -103,26 +103,26 @@ export default class Header extends PureComponent {
                                 <li className="flexible aCenter">
                                     <NavLink to={`/contact-us/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_contact_us}</NavLink>
                                 </li>
-                                {
-                                  window.localStorage.token ?
-                                  <li>
-                                    <div className="auth-dropdown">
-                                      <div
-                                        className="img"
-                                        style={{ backgroundImage : `url(${DEFAULT_USER_IMAGE})` }}
-                                        alt=""
-                                        onClick={() => this.onToggleProfileMenu()}
-                                        />
-                                      <div className={`profile-menu flexible vertical ${this.state.isOpenMenu ? 'isOpen' : ''}`}>
-                                        <span>My Profile</span>
-                                        <span onClick={()=> this.onSignOut()}>Sign Out</span>
-                                      </div>
-                                    </div>
-                                  </li> :
-                                  <li className="flexible aCenter">
-                                      <a onClick={() => this.toggleHeader('login')}>{this.state.language && selectLanguage(this.state.language).header_login}</a>
-                                  </li>
-                                }
+                                {/*{*/}
+                                  {/*window.localStorage.token ?*/}
+                                  {/*<li>*/}
+                                    {/*<div className="auth-dropdown">*/}
+                                      {/*<div*/}
+                                        {/*className="img"*/}
+                                        {/*style={{ backgroundImage : `url(${DEFAULT_USER_IMAGE})` }}*/}
+                                        {/*alt=""*/}
+                                        {/*onClick={() => this.onToggleProfileMenu()}*/}
+                                        {/*/>*/}
+                                      {/*<div className={`profile-menu flexible vertical ${this.state.isOpenMenu ? 'isOpen' : ''}`}>*/}
+                                        {/*<span>My Profile</span>*/}
+                                        {/*<span onClick={()=> this.onSignOut()}>Sign Out</span>*/}
+                                      {/*</div>*/}
+                                    {/*</div>*/}
+                                  {/*</li> :*/}
+                                  {/*<li className="flexible aCenter">*/}
+                                      {/*<a onClick={() => this.toggleHeader('login')}>{this.state.language && selectLanguage(this.state.language).header_login}</a>*/}
+                                  {/*</li>*/}
+                                {/*}*/}
                                 <li className="languages flexible aCenter">
                                     <div className="lang-block flexible aStart">
                                         <Icon
