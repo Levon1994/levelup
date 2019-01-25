@@ -4,6 +4,17 @@
   .main-content {
     width: 100%;
     padding-top: 60px;
+    .apply {
+      background-color: $main-color;
+      max-width: 250px;
+      margin: 0 auto 50px auto;
+      width: 100%;
+      > span {
+        font-weight: bold;
+        color: #fff;
+        letter-spacing: .8px;
+      }
+    }
     .members {
       flex-flow: row wrap;
     }
@@ -17,6 +28,100 @@
             font-weight: bold;
           }
         }
+      }
+    }
+  }
+}
+
+.apply-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 105;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(8, 8, 8, 0.63);
+  .ApplyNow {
+    > .Icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .apply-body {
+      max-width: 500px;
+      min-height: 350px;
+      box-shadow: $material-shadow;
+      margin: 0 auto;
+      position: relative;
+      top: 150px;
+      border-radius: 3px;
+      overflow: hidden;
+      background-color: $main-color;
+      > span {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        color: $white;
+      }
+      form {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 25px;
+        .ValidatableForm_content {
+          .TextField {
+            margin-bottom: 15px;
+          }
+        }
+        .ValidatableForm_footer {
+          button {
+            background-color: $white;
+            &.disabled {
+              opacity: 0.3;
+            }
+            &:last-child {
+              margin-left: 15px;
+            }
+            > span {
+              font-weight: bold;
+              color: $main-color;
+            }
+          }
+        }
+      }
+      .courses-for-apply {
+        display: flex;
+        justify-content: center;
+        div {
+          &.choosen {
+            display: none;
+          }
+          width: 70px;
+          height: 55px;
+          background-position: center center;
+          background-color: $main-color;
+          background-repeat: no-repeat;
+          background-size: contain;
+          margin: 15px;
+          border-radius: 4px;
+          box-shadow: $material-shadow;
+          cursor: pointer;
+          transition: all 0.3s linear;
+          &:hover{
+            transform: scale(1.1);
+          }
+        }
+      }
+      .img {
+        height: 65px;
+        background-size: 40%;
+        background-position: center center;
+        background-color: $main-color;
+        background-repeat: no-repeat;
       }
     }
   }

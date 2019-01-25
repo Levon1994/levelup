@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
-
+import {
+    withRouter,
+} from 'react-router-dom';
 import { MainImageBlock, CourseItem } from 'components/common';
 
-import { selectLanguage } from 'translate';
+import { selectLanguage } from '../../translate';
 
 import {
     js,
@@ -14,6 +16,7 @@ import {
 
 import './style.scss';
 
+@withRouter
 export default class Courses extends PureComponent{
 
     courses = [

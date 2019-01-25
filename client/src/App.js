@@ -4,7 +4,7 @@ import {
   Switch,
   withRouter,
 } from 'react-router-dom';
-import { connect } from "react-redux";
+//import { connect } from "react-redux";
 
 import {
     Header,
@@ -18,19 +18,18 @@ import {
     Courses,
     CourseItemPage,
     Students,
-    Login,
     Quizzes,
 } from 'containers';
 
-import { getUserAuth } from 'actions/user-action';
+// import { getUserAuth } from 'actions/user-action';
 
 import './App.scss';
 import './media.scss';
 
-const mapStateToProps = ({logged}) => ({logged})
+// const mapStateToProps = ({logged}) => ({logged});
 
 @withRouter
-@connect(mapStateToProps, { getUserAuth })
+// @connect(mapStateToProps, { getUserAuth })
 export default class App extends PureComponent {
 
     componentWillMount(){
@@ -41,28 +40,23 @@ export default class App extends PureComponent {
         }
     };
 
-    generateRoutes = () => (
-            <Switch>
-                <Route
-                    exact
-                    path="/:lang"
-                    component={Main}
-                />
-                <Route exact path="/about/:lang" component={AboutUs} />
-                <Route exact path="/quzzies/:quiz?/:lang" component={Quizzes} />
-                <Route exact path="/contact-us/:lang" component={ContactUs} />
-                <Route exact path="/students/:lang" component={Students} />
-                <Route exact path="/courses/:lang" component={Courses} />
-                <Route exact path="/courses/:courseName/:lang" component={CourseItemPage} />
-            </Switch>
-    );
-
     render() {
         return (
             <article>
                 <Header lang={this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length - 1]} />
-                {this.props.logged && <Login/>}
-                {this.generateRoutes()}
+                <Switch>
+                    <Route
+                        exact
+                        path="/:lang"
+                        component={Main}
+                    />
+                    <Route path="/about/:lang" component={AboutUs} />
+                    <Route path="/quzzies/:quiz?/:lang" component={Quizzes} />
+                    <Route path="/contact-us/:lang" component={ContactUs} />
+                    <Route path="/students/:lang" component={Students} />
+                    <Route exact path="/courses/:lang" component={Courses} />
+                    <Route path="/courses/:courseName/:lang" component={CourseItemPage} />
+                </Switch>
                 <Footer lang={this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length - 1]}/>
             </article>
         );

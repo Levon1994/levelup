@@ -3,6 +3,8 @@ import Formsy from 'formsy-react';
 
 import { omit } from 'utils';
 
+import { LevelUpButton } from 'components/common';
+
 import './style.scss';
 
 export default class ValidatableForm extends React.PureComponent {
@@ -43,20 +45,11 @@ export default class ValidatableForm extends React.PureComponent {
                         additionalFooterContent ?
                             additionalFooterContent :
                             <div>
-                                <button
-                                    type="reset"
-                                    color="primary"
-                                    variant="raised"
-                                    children="Reset"
-                                    onClick={this.props.onReset}
-                                />
-                                <button
-                                    type="submit"
-                                    color="primary"
-                                    variant="raised"
+                                <LevelUpButton
+                                    onClick={this.props.onReset}>Reset</LevelUpButton>
+                                <LevelUpButton
                                     disabled={!this.state.canSubmit}
-                                    children="Submit"
-                                />
+                                    onClick={this.props.onReset}>Submit</LevelUpButton>
                             </div>
                     }
                     </div>

@@ -147,7 +147,6 @@ export default class Login extends PureComponent{
     )
 
     render(){
-      console.log(window.localStorage);
         return ReactDOM.createPortal(
             <div className="Login">
                 <Icon name="close" onClick={()=> this.props.toggleLogin(false)}/>

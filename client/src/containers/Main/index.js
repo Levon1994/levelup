@@ -2,13 +2,15 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
     withRouter,
-    NavLink,
+    //NavLink,
 } from 'react-router-dom';
 
 import { fetchTeamMembers } from 'actions/teamMembers-action.js';
 import { fetchVideoCartoons } from 'actions/videoCartoon-action.js';
 
 import { TeamMemberItem, MainVideoBlock, QuizCard, LevelUpButton }  from 'components/common';
+
+import  ApplyNow  from './ApplyNow';
 
 import { selectLanguage } from 'translate';
 
@@ -22,6 +24,10 @@ const mapStateToProps = ({ teamMembers, videoCartoons }) => ({ teamMembers, vide
     fetchVideoCartoons,
 })
 export default class Main extends PureComponent {
+
+    state = {
+        readyForApply: false,
+    };
 
     generateTeamMembers = () => (
         this.props.teamMembers && this.props.teamMembers.payload.data.map((member, index) => (
@@ -75,6 +81,8 @@ export default class Main extends PureComponent {
         this.props.fetchVideoCartoons();
     }
 
+    onToggleApplyForm = () => this.setState({ readyForApply: !this.state.readyForApply })
+
     render() {
         return (
             <section className="Main withStretch vertical flexible">
@@ -90,6 +98,20 @@ export default class Main extends PureComponent {
                     {/*<NavLink to={`/quzzies/${this.props.match.params.lang}`}>*/}
                       {/*<LevelUpButton>See More Quzzies</LevelUpButton>*/}
                     {/*</NavLink>*/}
+                    {
+                        this.state.readyForApply ?
+                            <ApplyNow
+                                lang={this.props.match.params.lang}
+                                onClose={this.onToggleApplyForm}
+                            />
+                            : null
+                    }
+                    <LevelUpButton
+                        className="apply"
+                        onClick={this.onToggleApplyForm}
+                    >
+                        {selectLanguage(this.props.match.params.lang).apply_now}
+                    </LevelUpButton>
                     <h2 className="header-text flexible vertical">{selectLanguage(this.props.match.params.lang).main_title} <div className="divider"/></h2>
                     <div className="members flexible jAround">
                         {this.generateTeamMembers()}
