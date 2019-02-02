@@ -29,6 +29,7 @@ export default class ApplyNow extends React.PureComponent{
 
         this.state = {
             courseIsChoosen: null,
+            applyForm: {},
         }
     }
 
@@ -52,8 +53,9 @@ export default class ApplyNow extends React.PureComponent{
 
     generateCoursesForApply = () => (
         <div className="courses-for-apply">
-            {this.coursesImages.map(item => (
+            {this.coursesImages.map((item, index) => (
                 <div
+                    key={index}
                     style={{ backgroundImage: `url(${item.url})` }}
                     onClick={() => this.onChooseCourse(item.name)}
                     className={(this.state.courseIsChoosen && this.state.courseIsChoosen !== item.name) ? 'choosen' : ''}
@@ -62,37 +64,73 @@ export default class ApplyNow extends React.PureComponent{
         </div>
     );
 
+    generateAdditionalFooterContent = () => (
+        <LevelUpButton
+            onClick={() => this.submitCourseRequest()}
+            className={this.state.isValid ? '' : 'disabled'}
+        >
+            {selectLanguage(this.props.lang).apply}
+        </LevelUpButton>
+    );
+
+    submitCourseRequest = () => {
+        const courseApplyForm = {...this.state.applyForm};
+        courseApplyForm.lang = this.props.lang;
+    };
+
+    onApplyFormChange = (applyForm) => this.setState({ applyForm });
+
+    onResetApply = () => this.setState({ courseIsChoosen: null, applyForm: {} })
+
     render(){
         return ReactDOM.createPortal(
             <div className="ApplyNow">
+                <div className="overlay" onClick={()=> this.props.onClose()} />
                 <Icon name="close" onClick={()=> this.props.onClose()}/>
                 <div className="apply-body animated bounceInDown flexible vertical jBetween">
-                    <span>{selectLanguage(this.props.lang).apply_now}</span>
+                    <span>
+                        {
+                            this.state.courseIsChoosen ?
+                                <Icon
+                                    name="leftArrow"
+                                    onClick={()=> this.onResetApply()}
+                                />
+                                : null
+                        }
+                        {selectLanguage(this.props.lang).apply_now}
+                        </span>
                     { this.generateCoursesForApply() }
                     {
                         this.state.courseIsChoosen &&
                         <ValidatableForm
                             className=" ValidatableForm "
-                            onChange={this.onSignInChange}
-                            onSubmit={this.onSignIn}
-                            checkFormValidation={(isSignInValid) => this.setState({ isSignInValid })}
+                            onChange={this.onApplyFormChange}
+                            checkFormValidation={(isValid) => this.setState({ isValid })}
+                            additionalFooterContent={this.generateAdditionalFooterContent()}
                         >
                             <FormsyText
                                 required
                                 name="name"
-                                placeholder="Name"
+                                placeholder={selectLanguage(this.props.lang).apply_form_name}
                                 validationError="Please enter a valid E-mail address"
                             />
                             <FormsyText
                                 required
                                 name="surname"
-                                placeholder="Surname"
+                                placeholder={selectLanguage(this.props.lang).apply_form_surname}
+                                validationError="Please enter a valid E-mail address"
+                            />
+                            <FormsyText
+                                required
+                                type="number"
+                                name="age"
+                                placeholder={selectLanguage(this.props.lang).apply_form_age}
                                 validationError="Please enter a valid E-mail address"
                             />
                             <FormsyText
                                 required
                                 name="email"
-                                placeholder="Email"
+                                placeholder={selectLanguage(this.props.lang).apply_form_email}
                                 validations="isEmail"
                                 validationError="Please enter a valid E-mail address"
                             />

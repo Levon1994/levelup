@@ -6,7 +6,7 @@ export default class CreateActionCreator {
 
     static create = ({ type, ...options }) => CreateActionCreator.dispatch(Fetch.post(options), `${type}_CREATE`);
 
-    static update = ({ type, ...options }) => CreateActionCreator.dispatch(Fetch.put(options), `${type}_UPDATE`);
+    static update = ({ type, ...options }) => CreateActionCreator.dispatch(Fetch.patch(options), `${type}_UPDATE`);
 
     static delete = ({ type, ...options }) => CreateActionCreator.dispatch(Fetch.delete(options), `${type}_DELETE`);
 

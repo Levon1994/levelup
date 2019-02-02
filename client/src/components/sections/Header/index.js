@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 import { connect } from "react-redux";
 
-import { Icon } from 'components/common';
+import { Icon, LevelUpButton } from 'components/common';
 
 import { selectLanguage } from 'translate';
 
@@ -72,12 +72,22 @@ export default class Header extends PureComponent {
     //   this.forceUpdate();
     // };
 
+    adminLogout = () => {
+        window.localStorage.clear();
+        window.location.reload();
+    };
+
+    generateAdminHeader = () => (
+      window.localStorage.token ? <LevelUpButton onClick={()=> this.adminLogout()}>Log Out</LevelUpButton> : null
+    );
+
     render() {
+        const isAdmin = this.props.history.location.pathname.split('/').includes('admin');
         return (
             <header className={`Header ${this.state.headerShown ? 'headerShown' :''}`}>
                 <nav className={`flexible jBetween ${this.state.isShadowShown ? 'isShadowShown' : ''}`}>
                     <div className="logo flexible aCenter">
-                        <NavLink to={`/${this.state.language}`}>
+                        <NavLink to={`/${isAdmin ? 'admin' : this.state.language}`}>
                             <div className="img" style={{ backgroundImage: `url(${Logo})` }}/>
                         </NavLink>
                     </div>
@@ -85,15 +95,15 @@ export default class Header extends PureComponent {
                       <div className={`hamburger-menu ${this.state.headerShown ? 'animate' : ''}`}></div>
                     </div>
                     {
-                        this.props.history.location.pathname.split('/').includes('admin')
-                            ? null :
+                        isAdmin
+                            ? this.generateAdminHeader() :
                             <ul className="flexible aCenter">
                                 {/*<li className="flexible aCenter">*/}
                                     {/*<NavLink to={`/cv/${this.state.language}`} activeClassName="active" onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).cv_templates_title}</NavLink>*/}
                                 {/*</li>*/}
-                                {/*<li className="flexible aCenter">*/}
-                                    {/*<NavLink to={`/students/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_students}</NavLink>*/}
-                                {/*</li>*/}
+                                <li className="flexible aCenter">
+                                    <NavLink to={`/students/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_students}</NavLink>
+                                </li>
                                 <li className="flexible aCenter">
                                     <NavLink to={`/courses/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_courses}</NavLink>
                                 </li>

@@ -36,8 +36,8 @@ export default class Fetch {
     /* POST (create) */
     static post = options => Fetch.request({ ...options, method: 'POST' });
 
-    /* PUT (update) */
-    static put = options => Fetch.request({ ...options, method: 'PUT' });
+    /* POST (create) */
+    static patch = options => Fetch.request({ ...options, method: 'PATCH' });
 
     /* DELETE (remove) */
     static delete = options => Fetch.request({ ...options, method: 'DELETE' });

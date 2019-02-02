@@ -10,6 +10,7 @@
     height: 200px;
     max-width: 100%;
     position: relative;
+    background-color: $white;
     &:hover {
       .hidden-block {
         display: flex;

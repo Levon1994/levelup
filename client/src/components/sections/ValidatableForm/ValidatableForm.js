@@ -46,6 +46,7 @@ export default class ValidatableForm extends React.PureComponent {
                             additionalFooterContent :
                             <div>
                                 <LevelUpButton
+                                    type="reset"
                                     onClick={this.props.onReset}>Reset</LevelUpButton>
                                 <LevelUpButton
                                     disabled={!this.state.canSubmit}

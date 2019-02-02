@@ -8,7 +8,7 @@ export default class StudentCard extends PureComponent {
 
     render(){
         return(
-            <div className="StudentCard">
+            <div className={`StudentCard ${this.props.className || ''}`} onClick={this.props.onClick}>
                 <div className="image-block image-centering" style={{ backgroundImage: `url(${this.props.url})` }} >
                     <div className="hidden-block flexible" onClick={this.props.openSlider}>
                         <Icon name="zoom" color="#fff"/>

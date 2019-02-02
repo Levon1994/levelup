@@ -7,7 +7,8 @@ export const authorizeUser = user => CreateActionCreator.create({
     body: user
 });
 
-export const getUserAuth = () => CreateActionCreator.create({
-  path: 'user/auth',
-  type: "USER_AUTH",
-})
+export const getUser = token => CreateActionCreator.create({
+    path: 'user/getuser',
+    type: USERAUTH,
+    body: token
+});

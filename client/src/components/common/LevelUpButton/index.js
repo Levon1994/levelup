@@ -7,7 +7,11 @@ import './style.scss';
 export default class LevelUpButton extends Component{
     render(){
         return(
-            <Button className={`LevelUpButton${this.props.disabled ? ' disabled' : ''}`} {...this.props}>{this.props.children}</Button>
+            <Button
+                className={`LevelUpButton${this.props.disabled ? ' disabled' : ''}`}
+                {...this.props}>
+                {this.props.children}
+            </Button>
         )
     }
 }

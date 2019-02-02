@@ -35,32 +35,65 @@ router.post('/', (req, res, next) => {
         linkedin: req.body.linkedin,
         instagram: req.body.instagram,
     });
-    teamMembersSchema.save().then(result => {
-        res.status(201).json({
-            message: 'Handling POST requests to /products',
-            createdProduct: result
-        })
-    }).catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error: err
-        })
+    teamMembersSchema.save(()=>{
+        TeamMemebrs.find()
+            .then((result) =>{
+                const response = {
+                    count: result.length,
+                    data: [...result],
+                };
+                res.status(200).json(response)
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                })
+            });
     });
+});
 
+router.patch('/:teamMemberId', (req, res, next) => {
+    const _id = req.params.teamMemberId;
+    TeamMemebrs.findOneAndUpdate({_id}, { $set: req.body }, (err) =>{
+        if(!err) {
+            TeamMemebrs.find()
+                .then((result) =>{
+                    const response = {
+                        count: result.length,
+                        data: [...result],
+                    };
+                    res.status(200).json(response)
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        error: err
+                    })
+                });
+        }
+    })
 });
 
 router.delete('/:teamMemberId', (req, res, next) => {
     const _id = req.params.teamMemberId;
-    TeamMemebrs.remove({_id})
-        .exec()
-        .then(result => {
-            console.log(res);
-            res.status(200).json(result)
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({ error: err })
-        })
+    TeamMemebrs.findByIdAndRemove({_id}, (err, doc)=> {
+        if(!err) {
+            TeamMemebrs.find().then((result) =>{
+                const response = {
+                    count: result.length,
+                    data: [...result],
+                };
+                res.status(200).json(response)
+            })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).json({
+                        error: err
+                    })
+                });
+        }
+    });
 });
 
 module.exports = router;

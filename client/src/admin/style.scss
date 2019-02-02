@@ -1,0 +1,32 @@
+@import "~main.scss";
+
+.Admin {
+  flex-grow: 1;
+  display: flex;
+  .Spinner {
+    width: 70px;
+    height: 70px;
+    background-color: #fff;
+    border: 3px solid #e6e6e6;
+    border-radius: 100%;
+    animation: spinnerAnimate 1s infinite;
+    border-top-color:  #000099;
+    margin: 3rem auto;
+    align-self: center;
+  }
+  .signInAdmin {
+    max-width: 60%;
+    margin: 20px auto;
+    .ValidatableForm {
+      .TextField:first-child {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}
+
+
+@keyframes spinnerAnimate {
+  from { transform: rotate(0) }
+  to { transform: rotate(360deg) }
+}

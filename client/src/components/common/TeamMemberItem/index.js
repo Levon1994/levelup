@@ -6,10 +6,10 @@ import './style.scss';
 
 export default class TeamMemberItem extends PureComponent{
     render(){
-        const { imageUrl, name, position, facebook, linkedin, instagram,  aboutWork } = this.props;
+        const { imageUrl, name, position, facebook, linkedin, instagram,  aboutWork, className } = this.props;
 
         return (
-            <div className="TeamMemberItem animated fadeInUp">
+            <div className={`TeamMemberItem animated fadeInUp ${className ? className : ''}`} onClick={this.props.onClick}>
                 <div className="team-member-item-block">
                     <div className="image-block" style={{ backgroundImage: `url(${imageUrl})` }}/>
                     <div className="text-block">

@@ -9,5 +9,9 @@ module.exports = {
             useNewUrlParser: true,
             useCreateIndex: true
         }
+    },
+    app: {
+        secret: 'reswenwyu2fewv^&*^d',
+        JWT_KEY : "secret"
     }
 };

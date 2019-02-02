@@ -1,0 +1,25 @@
+@import "~main.scss";
+
+.AdminMain {
+  flex-grow: 1;
+  padding: 15px;
+  padding-top: 60px !important;
+  .point-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 150px;
+    border-radius: 4px;
+    background-color: $main-color;
+    color: $white;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin: 15px;
+    cursor: pointer;
+    transition: all 0.3s linear;
+    &:hover {
+      box-shadow: $material-header-shadow;
+    }
+  }
+}

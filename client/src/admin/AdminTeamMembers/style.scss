@@ -1,0 +1,38 @@
+@import "~main.scss";
+.AdminTeamMembers {
+  padding-top: 65px !important;
+  .TeamMemberItem {
+    cursor: pointer;
+    width: 250px;
+    &.selected {
+      border: 3px solid $main-color;
+    }
+    .image-block {
+      height: 180px;
+    }
+  }
+  .team-members-buttons {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+    background-color: $main-background-color;
+    box-shadow: $material-header-shadow;
+    button {
+      margin: 10px;
+    }
+  }
+  .add-edit-form {
+    max-width: 600px;
+    width: 100%;
+    .ValidatableForm {
+      margin: 0 auto 40px;
+      width: 100%;
+      .TextField {
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+}

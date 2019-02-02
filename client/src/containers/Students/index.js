@@ -22,6 +22,10 @@ export default class Students extends PureComponent{
         arrow: null,
     };
 
+    students = [
+        'https://firebasestorage.googleapis.com/v0/b/newproject-b6af4.appspot.com/o/IMG-2439.JPG?alt=media&token=56b2d964-ff1b-4ccf-8dfd-fe13c79c2ed0',
+    ];
+
     componentDidMount(){
         this.props.fetchStudents();
     }
@@ -35,7 +39,7 @@ export default class Students extends PureComponent{
     checkChevrons = () => {
         if(this.state.key === 0) {
             this.setState({ arrow: 'prev' })
-        } else if(this.state.key === this.props.students.payload.data.studentsInfo.length - 1){
+        } else if(this.state.key === this.props.students.payload.data.length - 1){
             this.setState({ arrow: 'next' })
         }
         else {
@@ -55,7 +59,7 @@ export default class Students extends PureComponent{
     };
 
     generateStudentsImages = () => (
-        this.props.students && this.props.students.payload.data.studentsImages.map((item, key) => (
+        this.students && this.students.map((item, key) => (
             <MainImageBlock
                 key={key}
                 path={item}
@@ -75,10 +79,10 @@ export default class Students extends PureComponent{
     };
 
     nextSlide = (key) => {
-        if(this.state.key < this.props.students.payload.data.studentsInfo.length - 1) {
+        if(this.state.key < this.props.students.payload.data.length - 1) {
             this.setState({ key: key+1 })
         }
-        if(this.state.key === this.props.students.payload.data.studentsInfo.length - 2) {
+        if(this.state.key === this.props.students.payload.data.length - 2) {
             this.setState({ arrow: 'next' })
         } else {
             this.setState({ arrow: null })
@@ -86,7 +90,7 @@ export default class Students extends PureComponent{
     };
 
     generateStudents = () => (
-        this.props.students && this.props.students.payload.data.studentsInfo.map((student, key) => (
+        this.props.students && this.props.students.payload.data.map((student, key) => (
             <StudentCard
                 openSlider={()=> this.openSlider(key)}
                 url={student.imgUrl}
@@ -110,7 +114,7 @@ export default class Students extends PureComponent{
                         {
                             this.state.isSliderOpen &&
                             <LevelUpSlider
-                                data={this.props.students && this.props.students.payload.data.studentsInfo[this.state.key]}
+                                data={this.props.students && this.props.students.payload.data[this.state.key]}
                                 onClose={this.onClose}
                                 nextSlide={this.nextSlide}
                                 prevSlide={this.prevSlide}

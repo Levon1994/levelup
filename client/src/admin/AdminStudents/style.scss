@@ -1,0 +1,49 @@
+@import "~main.scss";
+
+.AdminStudents {
+  padding-top: 65px !important;
+  .team-members-buttons {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+    background-color: $main-background-color;
+    box-shadow: $material-header-shadow;
+    button {
+      margin: 10px;
+    }
+  }
+  .add-edit-form {
+    max-width: 600px;
+    width: 100%;
+    .ValidatableForm {
+      margin: 0 auto 40px;
+      width: 100%;
+      .TextField {
+        margin-bottom: 15px;
+      }
+    }
+  }
+  .StudentCard {
+    cursor: pointer;
+    width: 200px;
+    &.selected {
+      border: 3px solid $main-color;
+    }
+    .info-block {
+      padding: 10px 16px;
+      h3 {
+        font-size: 15px;
+      }
+    }
+    .image-block{
+      height: 180px;
+      &:hover {
+        .hidden-block {
+          display: none;
+        }
+      }
+    }
+  }
+}
