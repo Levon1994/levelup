@@ -3,7 +3,8 @@ import axios from 'axios';
 
 export default class Fetch {
     static async request(options) {
-        const ACCESS_TOKEN = window.localStorage.getItem('token') || '';
+        const admin = window.location.pathname.includes('admin');
+        const ACCESS_TOKEN = admin ? window.localStorage.getItem('token') : window.localStorage.getItem('userToken') || '';
         const { method, path, headers, body, additionalOptions = {} } = options;
         let requestConfig = {
             url: `${BASE_URL}${path}`,

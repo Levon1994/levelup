@@ -49,6 +49,8 @@
       border-radius: 10px;
       .image-centering {
         transform: none;
+        background-size: contain !important;
+        background-repeat: no-repeat;
       }
       .image-block {
         height: 100%;

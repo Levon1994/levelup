@@ -6,6 +6,8 @@ import { LevelUpSlider } from 'components/sections';
 
 import { fetchStudents } from "actions/students-action.js";
 
+//import TextField from 'components/sections/ValidatableForm/elements/TextField';
+
 import Slider from 'react-slick';
 import { selectLanguage } from 'translate';
 
@@ -20,6 +22,7 @@ export default class Students extends PureComponent{
         isSliderOpen: false,
         key: null,
         arrow: null,
+        studentsFilter: null,
     };
 
     students = [
@@ -90,7 +93,7 @@ export default class Students extends PureComponent{
     };
 
     generateStudents = () => (
-        this.props.students && this.props.students.payload.data.map((student, key) => (
+        this.props.students && this.filterData(this.props.students.payload.data).map((student, key) => (
             <StudentCard
                 openSlider={()=> this.openSlider(key)}
                 url={student.imgUrl}
@@ -101,6 +104,13 @@ export default class Students extends PureComponent{
         ))
     );
 
+    filterData = (data) => {
+        const filteredData = this.state.studentsFilter ? data.filter(item => item.name.toLowerCase().includes(this.state.studentsFilter.toLowerCase())): data;
+        return filteredData || [];
+    };
+
+    onChange = (event) => this.setState({ studentsFilter: event.target.value })
+
     render(){
         return(
             <div className="Students">
@@ -108,7 +118,16 @@ export default class Students extends PureComponent{
                     {this.generateStudentsImages()}
                 </Slider>
                 <div className="page-content students-content">
-                    <h2 className="header-text">{selectLanguage(this.props.match.params.lang).header_students} <div className="divider"/></h2>
+                    <h2 className="header-text">
+                        {selectLanguage(this.props.match.params.lang).header_students}
+                        <div className="divider"/>
+                    </h2>
+                    {/*<TextField*/}
+                        {/*type="text"*/}
+                        {/*placeholder={selectLanguage(this.props.match.params.lang).search}*/}
+                        {/*value={this.state.studentsFilter || ''}*/}
+                        {/*onChange={this.onChange}*/}
+                    {/*/>*/}
                     <div className="studetns-cards flexible jAround wrap">
                         {this.generateStudents()}
                         {

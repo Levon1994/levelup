@@ -63,9 +63,7 @@ export default class Login extends PureComponent{
     };
 
     onSignUpChange = (userSignUpInfo) => {
-        if(this.state.isSignUpValid){
-            this.setState({ userSignUpInfo })
-        }
+        this.setState({ userSignUpInfo })
     };
 
     onSignIn = () => {
@@ -75,7 +73,7 @@ export default class Login extends PureComponent{
         this.props.authorizeUser(this.state.userSignInInfo).then((data) => {
           if(data) {
             this.props.toggleLogin(false);
-            window.localStorage.setItem("token", JSON.stringify(data.payload.token))
+            window.localStorage.setItem("userToken", data.payload.token)
           }
         })
       }
@@ -108,6 +106,7 @@ export default class Login extends PureComponent{
           />
           <FormsyText
               required
+              type="password"
               name="password"
               placeholder="Password"
               validations="minLength:6"
@@ -131,6 +130,7 @@ export default class Login extends PureComponent{
           />
           <FormsyText
               required
+              type="password"
               name="password"
               placeholder="Password"
               validations="minLength:8"
@@ -138,6 +138,7 @@ export default class Login extends PureComponent{
           />
           <FormsyText
               required
+              type="password"
               name="repeated_password"
               placeholder="Confirm Password"
               validations="equalsField:password"

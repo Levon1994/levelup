@@ -7,8 +7,9 @@ import {
 
 import { fetchTeamMembers } from 'actions/teamMembers-action.js';
 import { fetchVideoCartoons } from 'actions/videoCartoon-action.js';
+import { getUser } from 'actions/user-action';
 
-import { TeamMemberItem, MainVideoBlock, QuizCard, LevelUpButton }  from 'components/common';
+import { TeamMemberItem, MainVideoBlock, LevelUpButton }  from 'components/common';
 
 import  ApplyNow  from './ApplyNow';
 
@@ -22,12 +23,19 @@ const mapStateToProps = ({ teamMembers, videoCartoons }) => ({ teamMembers, vide
 @connect(mapStateToProps, {
     fetchTeamMembers,
     fetchVideoCartoons,
+    getUser,
 })
 export default class Main extends PureComponent {
 
     state = {
         readyForApply: false,
     };
+
+    // componentWillMount(){
+    //     if(window.localStorage.length) {
+    //         this.props.getUser({ token: window.localStorage.userToken })
+    //     }
+    // }
 
     generateTeamMembers = () => (
         this.props.teamMembers && this.props.teamMembers.payload.data.map((member, index) => (

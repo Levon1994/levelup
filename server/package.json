@@ -22,10 +22,12 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "heroku": "^7.19.4",
+    "html-pdf": "^2.2.0",
     "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.3.8",
     "morgan": "^1.9.1",
-    "nodemailer": "^5.1.1"
+    "nodemailer": "^5.1.1",
+    "xoauth2": "^1.2.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.5"

@@ -4,7 +4,7 @@ import {
   Switch,
   withRouter,
 } from 'react-router-dom';
-//import { connect } from "react-redux";
+import { connect } from "react-redux";
 
 import {
     Header,
@@ -18,21 +18,20 @@ import {
     Courses,
     CourseItemPage,
     Students,
-    Quizzes,
+    Login,
 } from 'containers';
 
-import Admin from './admin';
+import {CvTemplates} from 'elements';
 
-// import { getUserAuth } from 'actions/user-action';
+import Admin from './admin';
 
 import './App.scss';
 import './media.scss';
 
-
-// const mapStateToProps = ({logged}) => ({logged});
+const mapStateToProps = ({logged}) => ({logged})
 
 @withRouter
-// @connect(mapStateToProps, { getUserAuth })
+@connect(mapStateToProps, null)
 export default class App extends PureComponent {
 
     componentWillMount(){
@@ -55,7 +54,7 @@ export default class App extends PureComponent {
                 component={Main}
             />
             <Route path="/about/:lang" component={AboutUs} />
-            {/*<Route path="/quzzies/:quiz?/:lang" component={Quizzes} />*/}
+            <Route path="/resume/:lang" component={CvTemplates} />
             <Route path="/contact-us/:lang" component={ContactUs} />
             <Route path="/students/:lang" component={Students} />
             <Route exact path="/courses/:lang" component={Courses} />
@@ -67,6 +66,7 @@ export default class App extends PureComponent {
         return (
             <article>
                 <Header lang={this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length - 1]} />
+                {this.props.logged && <Login/>}
                 {this.generateRoutes()}
                 <Footer lang={this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length - 1]}/>
             </article>

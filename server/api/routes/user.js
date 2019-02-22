@@ -57,6 +57,7 @@ router.post("/login", (req, res, next) => {
           message: "Auth failed"
         });
       }
+      console.log(user);
       if (user[0].password === encryptPassword(password)) {
           const token = jwt.sign(
               {
@@ -78,7 +79,7 @@ router.post("/login", (req, res, next) => {
 
       } else {
           return res.status(401).json({
-              message: "Auth failed"
+              message: "Auth faileding"
           });
       }
     })

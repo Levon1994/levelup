@@ -66,81 +66,128 @@
       border-radius: 3px;
       overflow: hidden;
       background-color: $main-color;
-      > span {
-        text-align: center;
-        margin-top: 30px;
-        margin-bottom: 10px;
-        font-size: 24px;
-        font-weight: bold;
-        color: $white;
-        position: relative;
-        > .Icon {
-          position: absolute;
-          left: 25px;
-          top: 5px;
-          cursor: pointer;
-          svg {
-            fill: $white;
-          }
+      .loader {
+        .image-block{
+          width: 100%;
+          height: 200px;
+          background-size: cover;
+          background-position: center center;
+          border-bottom-left-radius: 60px;
+          border-bottom-right-radius: 60px;
+        }
+        .loader-spiner {
+          width: 60px;
+          height: 60px;
+          background-color: $main-color;
+          border: 7px solid #fff;
+          border-radius: 100%;
+          animation: spinnerAnimate 1s infinite;
+          border-top-color:  $green;
+          margin: 3rem auto;
+          align-self: center;
         }
       }
-      form {
+      .congrats {
+        padding: 20px 40px;
+        justify-content: space-around;
         flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 25px;
-        .ValidatableForm_content {
-          .TextField {
-            margin-bottom: 15px;
-          }
+        h3 {
+          color: $white;
+          font-weight: bold;
+          font-size: 30px;
         }
-        .ValidatableForm_footer {
-          button {
-            background-color: $white;
-            &.disabled {
-              opacity: 0.3;
-            }
-            &:last-child {
-              margin-left: 15px;
-            }
-            > span {
-              font-weight: bold;
-              color: $main-color;
-            }
-          }
+        .Icon {
+
+        }
+        p {
+          color: $white;
+          font-weight: bold;
+          text-align: center;
         }
       }
-      .courses-for-apply {
-        display: flex;
-        justify-content: center;
-        div {
-          &.choosen {
-            display: none;
+      >div {
+        > span {
+          text-align: center;
+          margin-top: 30px;
+          margin-bottom: 10px;
+          font-size: 24px;
+          font-weight: bold;
+          color: $white;
+          position: relative;
+          > .Icon {
+            position: absolute;
+            left: 25px;
+            top: 5px;
+            cursor: pointer;
+            svg {
+              fill: $white;
+            }
           }
-          width: 70px;
-          height: 55px;
+        }
+        form {
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 25px;
+          .ValidatableForm_content {
+            .TextField {
+              margin-bottom: 15px;
+            }
+          }
+          .ValidatableForm_footer {
+            button {
+              background-color: $white;
+              &.disabled {
+                opacity: 0.3;
+              }
+              &:last-child {
+                margin-left: 15px;
+              }
+              > span {
+                font-weight: bold;
+                color: $main-color;
+              }
+            }
+          }
+        }
+        .courses-for-apply {
+          display: flex;
+          justify-content: center;
+          div {
+            &.choosen {
+              display: none;
+            }
+            width: 70px;
+            height: 55px;
+            background-position: center center;
+            background-color: $main-color;
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin: 15px;
+            border-radius: 4px;
+            box-shadow: $material-shadow;
+            cursor: pointer;
+            transition: all 0.3s linear;
+            &:hover{
+              transform: scale(1.1);
+            }
+          }
+        }
+        .img {
+          height: 65px;
+          background-size: 40%;
           background-position: center center;
           background-color: $main-color;
           background-repeat: no-repeat;
-          background-size: contain;
-          margin: 15px;
-          border-radius: 4px;
-          box-shadow: $material-shadow;
-          cursor: pointer;
-          transition: all 0.3s linear;
-          &:hover{
-            transform: scale(1.1);
-          }
         }
-      }
-      .img {
-        height: 65px;
-        background-size: 40%;
-        background-position: center center;
-        background-color: $main-color;
-        background-repeat: no-repeat;
       }
     }
   }
+}
+
+
+@keyframes spinnerAnimate {
+  from { transform: rotate(0) }
+  to { transform: rotate(360deg) }
 }

@@ -19,6 +19,7 @@ import AdminMain from './AdminMain';
 import './style.scss';
 import AdminTeamMembers from "./AdminTeamMembers";
 import AdminStudents from "./AdminStudents";
+import AdminApplyers from "./AdminApplyers";
 
 const mapStateToProps = ({ user }) => ({ user });
 
@@ -32,9 +33,10 @@ export default class Admin extends React.PureComponent{
     };
 
     componentWillMount() {
-        if(window.localStorage.length) {
+        if(window.localStorage.token) {
             this.setState({ isLoading: true });
-            this.props.getUser({ token: window.localStorage.token }).then((data) => {
+            this.props.getUser({ token: window.localStorage.token })
+                .then((data) => {
                 data && this.setState({ isLoading: false })
             })
         } else {
@@ -77,6 +79,7 @@ export default class Admin extends React.PureComponent{
                       <Route exact path="/admin" component={AdminMain} />
                       <Route path="/admin/team-members" component={AdminTeamMembers}/>
                       <Route path="/admin/students" component={AdminStudents}/>
+                      <Route path="/admin/applyers" component={AdminApplyers}/>
                   </Switch>
       } else {
           return (

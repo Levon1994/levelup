@@ -1,0 +1,14 @@
+.Uploader {
+  display: inline-flex;
+  position: relative;
+  cursor: pointer;
+  input{
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+    outline: none;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+}

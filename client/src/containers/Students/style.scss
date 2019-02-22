@@ -1,12 +1,15 @@
 .Students {
-  .StudentsCard {
+  .StudentCard {
     .image-block {
-      background-position: inherit;
       background-color: white;
+      background-size: contain !important;
+      background-repeat: no-repeat;
     }
   }
-}
-
-.image-centering {
-  background-position: inherit !important;
+  .page-content {
+    > .TextField {
+      margin: 0 auto 28px auto;
+      max-width: 400px;
+    }
+  }
 }
