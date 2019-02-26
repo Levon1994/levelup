@@ -1,28 +1,26 @@
 import React from 'react';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 
 import { MainImageBlock, CvCard } from 'components/common';
 
 import { selectLanguage } from 'translate';
 
-import { getUser } from 'actions/user-action';
-
-import  Uploader  from 'components/sections/ValidatableForm/elements/Uploader';
+//import { getUser } from 'actions/user-action';
 
 import './style.scss';
 
-const mapStateToProps = ({ user }) => ({ user });
-
-@connect(mapStateToProps, {
-    getUser,
-})
+// const mapStateToProps = ({ user }) => ({ user });
+//
+// @connect(mapStateToProps, {
+//     getUser,
+// })
 export default class CvTemplates extends React.PureComponent{
 
-    componentWillMount(){
-        if(!(this.props.user && this.props.user.payload.auth)) {
-            this.props.history.goBack();
-        }
-    }
+    // componentWillMount(){
+    //     if(!(this.props.user && this.props.user.payload.auth)) {
+    //         this.props.history.goBack();
+    //     }
+    // }
 
   render(){
     return(
@@ -33,7 +31,6 @@ export default class CvTemplates extends React.PureComponent{
             <div className="cv-templates-content page-content">
                 <h2 className="header-text">{selectLanguage(this.props.match.params.lang).cv_templates_title} <div className="divider"/></h2>
                 <CvCard/>
-                <Uploader/>
             </div>
           </section>
     )

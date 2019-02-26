@@ -54,7 +54,7 @@ export default class App extends PureComponent {
                 component={Main}
             />
             <Route path="/about/:lang" component={AboutUs} />
-            <Route path="/resume/:lang" component={CvTemplates} />
+            {/*<Route path="/resume/:lang" component={CvTemplates} />*/}
             <Route path="/contact-us/:lang" component={ContactUs} />
             <Route path="/students/:lang" component={Students} />
             <Route exact path="/courses/:lang" component={Courses} />

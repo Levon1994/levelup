@@ -62,9 +62,10 @@ export default class Header extends PureComponent {
         if(key === 'login') {
             this.props.toggleLogin(true);
         } else if (key === 'resume') {
-            this.props.user && this.props.user.payload.auth ?
-                this.props.history.push(`/resume/${this.state.language}`) :
-                this.props.toggleLogin(true);
+            // this.props.user && this.props.user.payload.auth ?
+            //     this.props.history.push(`/resume/${this.state.language}`) :
+            //     this.props.toggleLogin(true);
+            this.props.history.push(`/resume/${this.state.language}`)
         }
         this.setState({ headerShown: !this.state.headerShown });
     };
@@ -102,9 +103,9 @@ export default class Header extends PureComponent {
                         isAdmin
                             ? this.generateAdminHeader() :
                             <ul className="flexible aCenter">
-                                <li className="flexible aCenter">
-                                    <NavLink to={`/resume/${this.state.language}`} activeClassName="active" onClick={() => this.toggleHeader('resume')}>{this.state.language && selectLanguage(this.state.language).cv_templates_title}</NavLink>
-                                </li>
+                                {/*<li className="flexible aCenter">*/}
+                                    {/*<NavLink to={`/resume/${this.state.language}`} activeClassName="active" onClick={() => this.toggleHeader('resume')}>{this.state.language && selectLanguage(this.state.language).cv_templates_title}</NavLink>*/}
+                                {/*</li>*/}
                                 <li className="flexible aCenter">
                                     <NavLink to={`/students/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_students}</NavLink>
                                 </li>
@@ -117,26 +118,26 @@ export default class Header extends PureComponent {
                                 <li className="flexible aCenter">
                                     <NavLink to={`/contact-us/${this.state.language}`} onClick={this.toggleHeader}>{this.state.language && selectLanguage(this.state.language).header_contact_us}</NavLink>
                                 </li>
-                                {
-                                    this.props.user && this.props.user.payload.auth ?
-                                  <li>
-                                    <div className="auth-dropdown">
-                                      <div
-                                        className="img"
-                                        style={{ backgroundImage : `url(${DEFAULT_USER_IMAGE})` }}
-                                        alt=""
-                                        onClick={() => this.onToggleProfileMenu()}
-                                        />
-                                      <div className={`profile-menu flexible vertical ${this.state.isOpenMenu ? 'isOpen' : ''}`}>
-                                        <span>My Profile</span>
-                                        <span onClick={()=> this.Logout()}>Sign Out</span>
-                                      </div>
-                                    </div>
-                                  </li> :
-                                  <li className="flexible aCenter">
-                                      <a onClick={() => this.toggleHeader('login')}>{this.state.language && selectLanguage(this.state.language).header_login}</a>
-                                  </li>
-                                }
+                                {/*{*/}
+                                    {/*this.props.user && this.props.user.payload.auth ?*/}
+                                  {/*<li>*/}
+                                    {/*<div className="auth-dropdown">*/}
+                                      {/*<div*/}
+                                        {/*className="img"*/}
+                                        {/*style={{ backgroundImage : `url(${DEFAULT_USER_IMAGE})` }}*/}
+                                        {/*alt=""*/}
+                                        {/*onClick={() => this.onToggleProfileMenu()}*/}
+                                        {/*/>*/}
+                                      {/*<div className={`profile-menu flexible vertical ${this.state.isOpenMenu ? 'isOpen' : ''}`}>*/}
+                                        {/*<span>My Profile</span>*/}
+                                        {/*<span onClick={()=> this.Logout()}>Sign Out</span>*/}
+                                      {/*</div>*/}
+                                    {/*</div>*/}
+                                  {/*</li> :*/}
+                                  {/*<li className="flexible aCenter">*/}
+                                      {/*<a onClick={() => this.toggleHeader('login')}>{this.state.language && selectLanguage(this.state.language).header_login}</a>*/}
+                                  {/*</li>*/}
+                                {/*}*/}
                                 <li className="languages flexible aCenter">
                                     <div className="lang-block flexible aStart">
                                         <Icon

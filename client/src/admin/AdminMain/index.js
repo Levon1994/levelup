@@ -11,7 +11,8 @@ export default class AdminMain extends React.PureComponent{
     points = [
         { name: 'Students', key: 'students' },
         { name: 'Team Members', key: 'team-members' },
-        { name: 'Applyers', key: 'applyers' }
+        { name: 'Applyers', key: 'applyers' },
+        { name: 'Courses', key: 'courses' }
     ];
 
     generateCards = () => (

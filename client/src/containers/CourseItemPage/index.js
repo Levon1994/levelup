@@ -16,12 +16,22 @@ const mapStateToProps = ({courseInfo}) => ({courseInfo})
 @connect(mapStateToProps, {fetchCourseInfo})
 export default class CourseItemPage extends PureComponent{
 
+    state = {
+     data: null
+    };
+
+    courses = ['html_css','js','node_js','qa_automation','java'];
+
     componentDidMount(){
-        this.props.fetchCourseInfo();
+        if(this.courses.includes(this.props.match.params.courseName)) {
+            this.props.fetchCourseInfo(this.props.match.params.courseName).then((res) => {
+                res && this.setState({ data: res.payload.data[0] })
+            });
+        }
     }
 
     generateCourseDescription  = () => (
-        this.props.courseInfo && this.props.courseInfo.payload.data[this.props.match.params.courseName].description.map((desc, index) => (
+        this.state.data && this.state.data.description.map((desc, index) => (
             <div className="desc-line flexible aStart animated fadeInRight" key={index}>
                 <span className="image-centering" style={{ backgroundImage: `url(${descIcon})` }}/>
                 {desc}
@@ -30,7 +40,7 @@ export default class CourseItemPage extends PureComponent{
     );
 
     generateCourseInfo = () => {
-        const courseInfo = this.props.courseInfo && this.props.courseInfo.payload.data[this.props.match.params.courseName].info;
+        const courseInfo = this.state.data && this.state.data.info;
         if(courseInfo){
             return Object.keys(courseInfo).map((course, key) => (
                 <div className="info flexible aCenter" key={key}>
@@ -44,33 +54,34 @@ export default class CourseItemPage extends PureComponent{
         }
     };
 
-    generateTrainerInfo = () => {
-        const trainerInfo = this.props.courseInfo && this.props.courseInfo.payload.data[this.props.match.params.courseName].trainerInfo;
-
-        if(trainerInfo){
-            return <div className="trainer-info flexible vertical aCenter">
+    generateTrainerInfo = () => (
+        this.state.data && this.state.data.trainerInfo.map((item) => (
+            <div className="trainer-info flexible vertical aCenter" key={item._id}>
                 <div className="image-block">
-                    <div className="img image-centering" style={{ backgroundImage: `url(${trainerInfo.path})` }}/>
+                    <div className="img image-centering" style={{ backgroundImage: `url(${item.path})` }}/>
                 </div>
-                <div className="name">{trainerInfo.name}</div>
-                <div className="position">{trainerInfo.position}</div>
+                <div className="name">{item.name}</div>
+                <div className="position">{item.position}</div>
             </div>
-        }
-    };
+        ))
+);
 
     render(){
-        if(this.props.courseInfo && !Object.keys(this.props.courseInfo.payload.data).includes(this.props.match.params.courseName)) {
+        console.log("Log ::: this.state.data.name.includes(this.props.match.params.courseName) ::: ", this.state.data && this.state.data.name.includes(this.props.match.params.courseName));
+        if(!this.courses.includes(this.props.match.params.courseName)) {
             this.props.history.push('/am');
             return null;
         } else {
             return (
                 <div className="CourseItemPage withStretch flexible vertical">
                     <MainImageBlock
-                        path={this.props.courseInfo && this.props.courseInfo.payload.data[this.props.match.params.courseName].path}
+                        path={this.state.data && this.state.data.path}
                     />
                     <div className="courses-item-content page-content">
                         <h2 className="header-text">{selectLanguage(this.props.match.params.lang).course_item_trainer} <div className="divider"/></h2>
-                        {this.generateTrainerInfo()}
+                        <div className="flexible jCenter wrap">
+                            {this.generateTrainerInfo()}
+                        </div>
                         <h2 className="header-text">{selectLanguage(this.props.match.params.lang).course_item_description}  <div className="divider"/></h2>
                         <div className="course-item-content-block flexible vertical">
                             {this.generateCourseDescription()}

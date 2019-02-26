@@ -1,7 +1,7 @@
 import React from 'react';
 import { propTypes, withFormsy } from 'formsy-react';
 
-import TextField from '../elements/TextField';
+import TextField from '../elements/TextField/index';
 
 @withFormsy
 export default class FormsyText extends React.Component {

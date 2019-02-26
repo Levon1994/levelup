@@ -1,7 +1,7 @@
 import React from 'react';
 import { propTypes, withFormsy } from 'formsy-react';
 
-import Uploader from '../elements/Uploader';
+import Uploader from '../elements/Uploader/index';
 
 @withFormsy
 export default class FormsyUploader extends React.Component {
