@@ -1,6 +1,6 @@
 ### Welcome to Level Up IT Center
 
-![Jest watch mode](https://firebasestorage.googleapis.com/v0/b/newproject-b6af4.appspot.com/o/…0cover%20700%20px.jpg?alt=media&token=a8c09644-d1d8-428a-841b-32e6c3d5fcff)
+![Jest watch mode](https://firebasestorage.googleapis.com/v0/b/newproject-b6af4.appspot.com/o/level%20up%20cover%20700%20px.jpg?alt=media&token=a8c09644-d1d8-428a-841b-32e6c3d5fcff)
 
 
 This project was created with React.js and Node.js.
