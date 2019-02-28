@@ -1,0 +1,34 @@
+@import "~main.scss";
+
+.AdminCourses {
+  padding-top: 65px !important;
+  .CourseItem {
+    &.selected {
+      border: 8px solid $white;
+    }
+  }
+  .ValidatableForm {
+    .TextField {
+      margin-bottom: 15px;
+    }
+  }
+  .add-edit-form {
+    width: 100%;
+    .EditForm {
+      width: 100%;
+      .ValidatableForm {
+        width: 100%;
+        hr {
+          margin-bottom: 15px;
+        }
+        .TextField {
+          &_label {
+            color: $main-color;
+            font-weight: bold;
+            padding-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -16,6 +16,7 @@ export default class FormsyText extends React.Component {
             <TextField
                 type={props.type}
                 name={props.name}
+                label={props.label}
                 required={props.required}
                 disabled={props.disabled}
                 helperText={props.helperText}

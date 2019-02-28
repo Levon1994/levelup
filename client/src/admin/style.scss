@@ -23,6 +23,18 @@
       }
     }
   }
+  .team-members-buttons {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+    background-color: $main-background-color;
+    box-shadow: $material-header-shadow;
+    button {
+      margin: 10px;
+    }
+  }
 }
 
 

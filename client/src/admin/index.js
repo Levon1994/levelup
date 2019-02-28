@@ -37,13 +37,13 @@ export default class Admin extends React.PureComponent{
         if(window.localStorage.token) {
             this.setState({ isLoading: true });
             this.props.getUser({ token: window.localStorage.token })
-                .then((data) => {
-                if(data) {
-                    this.setState({ isLoading: false })
-                } else {
-                    this.props.history.push('/admin')
-                }
-            })
+                .then((data) => data && this.setState({ isLoading: false }))
+                .catch((err) => {
+                    if(err) {
+                        this.setState({ isLoading: false })
+                        this.props.history.push('/admin')
+                    }
+                })
         } else {
             this.props.history.push('/admin')
         }

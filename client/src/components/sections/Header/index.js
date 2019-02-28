@@ -9,7 +9,7 @@ import { Icon, LevelUpButton } from 'components/common';
 
 import { selectLanguage } from 'translate';
 
-import {DEFAULT_USER_IMAGE} from 'configs';
+//import {DEFAULT_USER_IMAGE} from 'configs';
 
 import Logo from 'assets/level-up-logo.png';
 

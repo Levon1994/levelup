@@ -70,7 +70,7 @@ export default class AdminTeamMembers extends React.PureComponent{
         if(this.state.event === 'edit') {
             this.props.updateTeamMembers(this.state.isChoosen, this.state.member).then((data) => {
                 data && this.setState({ isChoosen: null })
-            });;
+            });
         } else {
             this.props.addTeamMembers(this.state.member);
         }

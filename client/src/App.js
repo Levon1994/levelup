@@ -21,7 +21,7 @@ import {
     Login,
 } from 'containers';
 
-import {CvTemplates} from 'elements';
+//import {CvTemplates} from 'elements';
 
 import Admin from './admin';
 
