@@ -7,6 +7,15 @@ import ValidatableForm, {
 import { LevelUpButton } from 'components/common';
 
 export default class EditForm extends React.PureComponent{
+    // constructor(props) {
+    //     super(props);
+
+    //     this.state = {
+    //         isValid: false,
+    //         data: { ...(props.event === 'edit' ? props.data : null) }
+    //     }
+    // }
+
 
     state = {
         data : {
@@ -22,9 +31,9 @@ export default class EditForm extends React.PureComponent{
         }
     };
 
-    componentWillMount(){
-        this.setState({ data: this.props.data.payload.data[0] })
-    }
+    // componentWillMount(){
+    //     this.setState({ data: this.props.data.payload.data[0] })
+    // }
 
     generateDescription = () => (
         this.state.data.description.map((item, index) => (
@@ -111,7 +120,7 @@ export default class EditForm extends React.PureComponent{
                         placeholder="Course Image Path"
                         validations="isExisty"
                         validationError="Please fill*"
-                        value={this.state.data.name}
+                        value={this.state.data.path}
                     />
                     <FormsyText
                         required

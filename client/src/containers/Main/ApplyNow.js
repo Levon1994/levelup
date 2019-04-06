@@ -15,6 +15,10 @@ import {
     java,
     qa_automation,
     node_js,
+    html_css,
+    react_redux,
+    qa_manual,
+    angular,
 } from 'assets/courses';
 
 import {
@@ -58,10 +62,14 @@ export default class ApplyNow extends React.PureComponent{
     }
 
     coursesImages = [
-        { url: js, name: 'js' },
-        { url: java, name: 'java' },
-        { url: qa_automation, name: 'qa_automation' },
-        { url: node_js, name: 'nodejs'}
+        { url: html_css, name: 'html_css', fulName: 'Web Design' },
+        { url: js, name: 'js', fulName: 'Javascript' },
+       { url: react_redux, name: 'react_redux_logo', fulName: 'React, Redux' },
+       { url: angular, name: 'angular', fulName: 'Angular' },
+        { url: node_js, name: 'nodejs', fulName: 'Node JS' },
+        { url: java, name: 'java', fulName: 'Java'  },
+        { url: qa_automation, name: 'qa_automation', fulName: 'QA Automation'  },
+       { url: qa_manual, name: 'qa_manual', fulName: 'QA Manual'  },
     ];
 
     onChooseCourse = (course) => this.setState({ courseIsChoosen: course });
@@ -69,12 +77,13 @@ export default class ApplyNow extends React.PureComponent{
     generateCoursesForApply = () => (
         <div className="courses-for-apply">
             {this.coursesImages.map((item, index) => (
-                <div
-                    key={index}
-                    style={{ backgroundImage: `url(${item.url})` }}
-                    onClick={() => this.onChooseCourse(item.name)}
+                <div onClick={() => this.onChooseCourse(item.name)}
                     className={(this.state.courseIsChoosen && this.state.courseIsChoosen !== item.name) ? 'choosen' : ''}
-                />
+                    key={index}
+                    >
+                    <div style={{ backgroundImage: `url(${item.url})` }}></div>
+                    <h3>{item.fulName}</h3>
+                </div>
             ))}
         </div>
     );

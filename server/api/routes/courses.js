@@ -4,6 +4,28 @@ const mongoose = require('mongoose');
 
 const Courses = require('../models/courses');
 
+
+router.get('/', (req, res, next) => {
+    Courses.find()
+        .exec()
+        .then(courses => {
+            const response = {
+                count: courses.length,
+                data: courses,
+            }
+            if (courses.length >= 0) {
+                res.status(200).json(response)
+            } else {
+                res.status(404).json({ message: 'No entries found' })
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: err ,message:"1111"})
+        })
+});
+
+
 router.get('/:name', (req, res, next) => {
     const name = req.params.name;
     Courses.find({ name })
@@ -21,7 +43,7 @@ router.get('/:name', (req, res, next) => {
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({ error: err })
+            res.status(500).json({ error: err, message: "222" })
         })
 });
 
@@ -46,7 +68,8 @@ router.post('/', (req, res, next) => {
             .catch(err => {
                 console.log(err);
                 res.status(500).json({
-                    error: err
+                    error: err,
+                    message: "333"
                 })
             });
     });
@@ -67,7 +90,8 @@ router.patch('/:course', (req, res, next) => {
                 .catch(err => {
                     console.log(err);
                     res.status(500).json({
-                        error: err
+                        error: err, 
+                        message: "444"
                     })
                 });
         }
@@ -88,7 +112,7 @@ router.delete('/:course', (req, res, next) => {
                 .catch(err => {
                     console.log(err);
                     res.status(500).json({
-                        error: err
+                        error: err, message: "555"
                     })
                 });
         }

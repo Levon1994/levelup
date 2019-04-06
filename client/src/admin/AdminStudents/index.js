@@ -44,8 +44,9 @@ export default class AdminStudents extends React.PureComponent{
         this.setState({ isChoosen: student._id, student: student })
     }
 
-    generateStudents = () => (
-        this.props.students && this.props.students.payload.data.map((student) => (
+    generateStudents = () => {
+        console.log("students :::::::", this.props)
+        return this.props.students && this.props.students.payload.data.map((student) => (
             <StudentCard
                 key={student._id}
                 url={student.imgUrl}
@@ -55,7 +56,7 @@ export default class AdminStudents extends React.PureComponent{
                 className={student._id === this.state.isChoosen ? 'selected' : ''}
             />
         ))
-    );
+    };
 
     onEditFormChange = (student) => {
         this.setState({  student })

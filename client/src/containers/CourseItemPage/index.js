@@ -67,7 +67,7 @@ export default class CourseItemPage extends PureComponent{
 );
 
     render(){
-        console.log("Log ::: this.state.data.name.includes(this.props.match.params.courseName) ::: ", this.state.data && this.state.data.name.includes(this.props.match.params.courseName));
+        console.log("Log ::: this.state.data.name.includes(this.props.match.params.courseName) ::: ", this.props);
         if(!this.courses.includes(this.props.match.params.courseName)) {
             this.props.history.push('/am');
             return null;

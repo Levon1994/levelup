@@ -1,61 +1,115 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchCourseInfo } from 'actions/courseInfo-action.js';
+import { 
+    fetchCourses,
+    addCourses,
+    updateCourses,
+    deleteCourses
+ } from 'actions/course-action.js';
+ 
+import { 
+    fetchCourseInfo
+ } from 'actions/courseInfo-action.js';
 
 import { LevelUpButton, CourseItem }  from 'components/common';
 
 import EditForm from './EditForm';
 
-import {
-    js,
-    java,
-    qa_automation,
-    html_css,
-    node_js,
-} from 'assets/courses';
+// import {
+//     js,
+//     java,
+//     html_css,
+//     qa_automation,
+//     node_js,
+// } from 'assets/courses';
 
 import './style.scss';
 
-const mapStateToProps = ({courseInfo}) => ({courseInfo})
+const mapStateToProps = ({ courses }) => ({ courses })
 
-@connect(mapStateToProps, {fetchCourseInfo})
+@connect(mapStateToProps, {
+    fetchCourses,
+    addCourses,
+    updateCourses,
+    deleteCourses
+})
+
+@connect(mapStateToProps, {
+    fetchCourseInfo
+})
 export default class AdminCourses extends React.PureComponent{
 
     state = {
         isChoosen: false,
         isOpenEditForm: false,
-        event: null,
-        selectedCourse: null,
+        // course: null,
+        // selectedCourse: null,
     };
 
-    courses = [
-        { name: 'html_css', path: html_css },
-        { name: 'js', path: js },
-        { name: 'java', path: java },
-        { name: 'qa_automation', path: qa_automation },
-        { name: 'node_js', path: node_js },
-    ];
+    toggleEditForm = (event) => this.setState({
+        isOpenEditForm: !this.state.isOpenEditForm,
+        event,
+        isChoosen: event === 'add' ? null : this.state.isChoosen,
+    });
 
-    getCourse = (course) => {
-        this.props.fetchCourseInfo(course).then((data)=>{
-            data && this.setState({ selectedCourse: data.payload.data[0] })
-        });
-        this.setState({ isChoosen: course })
+    componentDidMount() {
+        this.props.fetchCourseInfo();
+    }
+
+
+    onChooseCourse = (course) => {
+        this.setState({ isChoosen: course._id, course: course })
     };
 
-    generateCourses = () => (
-        this.courses.map((course, index) => (
+    // courses = [
+    //     { name: 'html_css', path: html_css },
+    //     { name: 'js', path: js },
+    //     { name: 'java', path: java },
+    //     { name: 'qa_automation', path: qa_automation },
+    //     { name: 'node_js', path: node_js },
+    // ];
+
+    // getCourse = (course) => {
+    //     this.props.fetchCourses(course).then((data)=>{
+    //         data && this.setState({ selectedCourse: data.payload.data[0] })
+    //     });
+    //     this.setState({ isChoosen: course })
+    // };
+
+    generateCourses = () => {
+        console.log("this.props :::  ::: ", this.props);
+        return this.props.courses && this.props.courses.payload.data.map((course, index) => (
             <CourseItem
                 key={index}
                 name={course.name}
                 path={course.path}
                 className={course.name === this.state.isChoosen ? 'selected' : ''}
-                onClick={()=> this.getCourse(course.name)}
+                onClick={() => this.onChooseCourse(course)}
             />
         ))
-    );
+    };
 
+    // onEditFormChange = (e) => {
+    //     this.setState({
+    //         selectedCourse: {
+    //             description: this.getDescriptions(e),
+    //             name: e.name,
+    //             path: e.path,
+    //             info: {
+    //                 duration: e.duration,
+    //                 effort: e.effort,
+    //                 price: e.price,
+    //             },
+    //             trainerInfo: []
+    //         }
+    //     })
+    //     this.getTrainerInfo(e);
+    // };
+    onEditFormChange = (course) => {
+        this.setState({ course })
+    };
+    
     getDescriptions = (data) => {
         const arr = [];
         Object.keys(data).forEach((item) => {
@@ -67,7 +121,7 @@ export default class AdminCourses extends React.PureComponent{
     };
     
     getTrainerInfo = (data) => {
-        const arr = [];
+        // const arr = [];
         Object.keys(data).forEach((item) =>{
             if(item.includes('trainer.name') || item.includes('trainer.path') || item.includes('trainer.position')) {
                 console.log("Log ::: 002 ::: ", item);
@@ -76,38 +130,26 @@ export default class AdminCourses extends React.PureComponent{
         });
     };
 
-    onEditFormChange = (e) => {
-        this.setState({
-            selectedCourse: {
-                description: this.getDescriptions(e),
-                name: e.name,
-                path: e.path,
-                info: {
-                    duration: e.duration,
-                    effort: e.effort,
-                    price: e.price,
-                },
-                trainerInfo: []
-            }
-        })
-        this.getTrainerInfo(e);
-    };
+    
 
     onUpdateCourse = () => {
-
+        this.setState({ isOpenEditForm: false });
+        if (this.state.event === 'edit') {
+            this.props.updateCourses(this.state.isChoosen, this.state.course).then((data) => {
+                data && this.setState({ isChoosen: null })
+            });
+        } else {
+            this.props.addCourses(this.state.course);
+        }
     };
 
-    onDeleteTeamMember = () => {
-
+    onDeleteCourse = () => {
+        this.props.deleteCourses(this.state.isChoosen).then((data) => {
+            data && this.setState({ isChoosen: null })
+        });
     };
 
-    toggleEditForm = event => this.setState({
-        isOpenEditForm: !this.state.isOpenEditForm,
-        event: event ? event : null,
-        isChoosen: event === 'add' ? null : this.state.isChoosen,
-    });
-
-
+   
     render(){
         return (
             <div className="AdminCourses page-content flexible vertical aCenter grow">

@@ -154,21 +154,33 @@
         .courses-for-apply {
           display: flex;
           justify-content: center;
-          div {
+          flex-direction: column;
+          align-items: center;
+          > div {
             &.choosen {
               display: none;
             }
-            width: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 55%;
             height: 55px;
-            background-position: center center;
-            background-color: $main-color;
-            background-repeat: no-repeat;
-            background-size: contain;
             margin: 15px;
             border-radius: 4px;
             box-shadow: $material-shadow;
             cursor: pointer;
             transition: all 0.3s linear;
+            div {
+            width: 20%;
+            height: 55px;
+            background-position: left center;
+            background-color: $main-color;
+            background-repeat: no-repeat;
+            background-size: contain;
+            }
+            h3{
+              color: #fff;
+            }
             &:hover{
               transform: scale(1.1);
             }
@@ -190,4 +202,15 @@
 @keyframes spinnerAnimate {
   from { transform: rotate(0) }
   to { transform: rotate(360deg) }
+}
+
+@media screen and (max-width: 580px) {
+  .apply-content .ApplyNow .apply-body > div .courses-for-apply > div h3 {
+    display: none; } 
+  .apply-content .ApplyNow .apply-body > div .courses-for-apply > div div{
+    width: 100%;
+  }
+  .apply-content .ApplyNow .apply-body > div .courses-for-apply{
+    flex-direction: row;
+  }
 }
